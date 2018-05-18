@@ -1,0 +1,53 @@
+<aside ref:dialog id="{id}" class="mdc-dialog" role="alertdialog" aria-labelledby="{id}-label" aria-describedby="{id}-description">
+  <div class="mdc-dialog__surface">
+    <header class="mdc-dialog__header">
+        <h2 id="{id}-label" class="mdc-dialog__header__title">
+            <slot name="title"></slot>
+        </h2>
+    </header>
+    <section id="{id}-body" class="mdc-dialog__body{scrollable?'--scrollable':''}">
+        <slot name="body"></slot>
+    </section>
+    <footer class="mdc-dialog__footer">
+        <slot name="footer"></slot>
+    </footer>
+  </div>
+  <div class="mdc-dialog__backdrop"></div>
+</aside>
+<link rel="stylesheet" type="text/css" href="@material/dialog/dist/mdc.dialog.css" />
+<script>
+import {MDCDialog} from "@material/dialog";
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCDialog(this.refs.dialog);
+        this.status = "undefined";
+        this.mdcComponent.listen('MDCDialog:accept', () => {
+            this.status = "accepted";
+            this.fire("accept");
+            this.set({"open": false});
+        });
+        this.mdcComponent.listen('MDCDialog:cancel', () => {
+            this.status = "cancelled";
+            this.fire("cancel");
+            this.set({"open": false});
+        });
+    },
+    onupdate({current, changed}) {
+        if (changed.open && current.open !== this.mdcComponent.open) {
+            if (current.open) {
+                this.mdcComponent.show();
+            } else {
+                this.mdcComponent.close();
+            }
+        }
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    methods: {
+        getStatus() {
+            return this.status;
+        }
+    }
+}
+</script>

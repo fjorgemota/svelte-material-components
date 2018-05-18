@@ -1,0 +1,14 @@
+<button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--{mode} {action?'mdc-dialog__action':''}"><slot></slot></button>
+<link rel="stylesheet" type="text/css" href="@material/dialog/dist/mdc.dialog.css" />
+<script>
+export default {
+    onstate({current, changed, previous}) {
+        if (changed.mode && previous) {
+            throw new Error("Mode cannot be changed");
+        }
+        if (current.mode !== "accept" && current.mode !== "cancel") {
+            throw new Error("Mode can be only 'accept' or 'cancel'");
+        }
+    }
+}
+</script>

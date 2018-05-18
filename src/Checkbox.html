@@ -1,0 +1,73 @@
+<div ref:checkbox {...attrs}>
+    <input bind:checked on:change type="checkbox"
+           class="mdc-checkbox__native-control"
+           id={id} disabled={disabled} value={value} />
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+           viewBox="0 0 24 24">
+        <path class="mdc-checkbox__checkmark-path"
+              fill="none"
+              stroke="white"
+              d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+      </svg>
+      <div class="mdc-checkbox__mixedmark"></div>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="@material/checkbox/dist/mdc.checkbox.css" />
+<script>
+import {MDCCheckbox} from '@material/checkbox';
+import {processAttributes} from './helpers.js';
+export default {
+    data() {
+        return {
+            "disabled": false,
+            "indeterminate": false,
+            "checked": false,
+            "value": "",
+            "id": ""
+        }
+    },
+    oncreate() {
+        this.mdcComponent = new MDCCheckbox(this.refs.checkbox);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+	onupdate({ changed, current }) {
+	    if (changed.checked) {
+	        this.mdcComponent.checked = current.checked;
+	    }
+	    if (changed.indeterminate) {
+	        this.mdcComponent.indeterminate = current.indeterminate;
+	    }
+	    if (changed.disabled) {
+	        this.mdcComponent.disabled = current.disabled;
+	    }
+	    if (changed.value) {
+	        this.mdcComponent.value = current.value;
+	    }
+	},
+	methods: {
+	    getMDCField() {
+	        return this.mdcComponent;
+	    }
+	},
+    computed: {
+        attrs(computed) {
+            let result = Object.assign({}, computed);
+            let cls = "mdc-checkbox";
+            let classes = [cls];
+            if (result["disabled"]) {
+                classes.push(cls+"--disabled");
+            }
+            delete result.checked;
+            delete result.indeterminate;
+            delete result.disabled;
+            delete result.value;
+            delete result.id;
+            delete result.attrs;
+            return processAttributes(result);
+        }
+    },
+}
+</script>

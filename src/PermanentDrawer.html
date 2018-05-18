@@ -1,0 +1,21 @@
+<nav refs:drawer {...attrs}>
+    <slot></slot>
+</nav>
+<link rel="stylesheet" type="text/css" href="@material/drawer/dist/mdc.drawer.css" />
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let classes = ["mdc-drawer mdc-drawer--permanent"];
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+}
+</script>

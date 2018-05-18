@@ -1,0 +1,50 @@
+<aside refs:drawer {...attrs}>
+  <nav class="mdc-drawer__drawer">
+    <header class="mdc-drawer__header">
+      <div class="mdc-drawer__header-content">
+        <slot name="header"></slot>
+      </div>
+    </header>
+    <div class="mdc-drawer__content">
+        <slot name="content"></slot>
+    </div>
+  </nav>
+</aside>
+<link rel="stylesheet" type="text/css" href="@material/drawer/dist/mdc.drawer.css" />
+<script>
+import {MDCTemporaryDrawer} from '@material/drawer';
+import {processAttributes} from './helpers.js';
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCTemporaryDrawer(this.refs.drawer);
+        this.mdcComponent.listen("MDCTemporaryDrawer:open", () => {
+            this.fire("open");
+            this.set({"open": true});
+        });
+        this.mdcComponent.listen("MDCTemporaryDrawer:close", () => {
+            this.fire("close");
+            this.set({"open": true});
+        });
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onupdate({current, changed}) {
+        if (changed.open && current.open !== this.mdcComponent.open) {
+            this.mdcComponent.open = current.open;
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let classes = ["mdc-drawer mdc-drawer--temporary"];
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+}
+</script>

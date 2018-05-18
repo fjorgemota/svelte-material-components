@@ -1,0 +1,52 @@
+<button on:click on:mouseup on:mousedown ref:fab {...attrs}>
+    <Icon class="mdc-fab__icon">
+        <slot></slot>
+    </Icon>
+</button>
+<link rel="stylesheet" type="text/css" href="@material/button/dist/mdc.button.css" />
+<script>
+import {MDCRipple} from '@material/ripple';
+import {processAttributes} from './helpers.js';
+export default {
+    components: {
+        Icon: './Icon.html'
+    },
+    onupdate({current, changed}) {
+        if (changed.ripple) {
+            if (current.ripple && this.mdcComponent === null) {
+                this.mdcComponent = new MDCRipple(this.refs.fab);
+            } else if (!current.ripple && this.mdcComponent !== null) {
+                this.mdcComponent.destroy();
+            }
+        }
+    },
+    oncreate() {
+        this.mdcComponent = null;
+    },
+    ondestroy() {
+        if (this.mdcComponent !== null) {
+            this.mdcComponent.destroy();
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-fab";
+            let classes = [cls];
+            for (let key of ["mini", "exited"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"+key);
+                }
+                delete result[key];
+            }
+            delete result.ripple;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>

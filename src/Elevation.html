@@ -1,0 +1,18 @@
+<div class="mdc-elevation--z{z} {transitions?'mdc-elevation-transition':''}">
+    <slot></slot>
+</div>
+<link rel="stylesheet" type="text/css" href="@material/elevation/dist/mdc.elevation.css" />
+<script>
+export default {
+    data() {
+        return {
+            transitions: false
+        }
+    },
+    onstate({current, changed, previous}) {
+        if (typeof current.z !== "number" || Math.floor(current.z) !== current.z || current.z < 1 || current.z > 24 ) {
+            throw new Error("Z must be a integer between 1 and 25");
+        }
+    }
+}
+</script>

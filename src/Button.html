@@ -1,0 +1,45 @@
+{#if href }
+<a href={href} on:click on:mouseup on:mousedown {...attrs}>
+    {#if icon }
+        <Icon class="mdc-button__icon">{ icon }</Icon>
+    {/if}
+    <slot></slot>
+</a>
+{ :else }
+<button on:click on:mouseup on:mousedown {...attrs}>
+    {#if icon }
+        <Icon class="mdc-button__icon">{ icon }</Icon>
+    {/if}
+    <slot></slot>
+</button>
+{/if}
+<link rel="stylesheet" type="text/css" href="@material/button/dist/mdc.button.css" />
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    components: {
+        Icon: "./Icon.html"
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-button";
+            let classes = [cls];
+            for (let key of ["ripple", "dense", "raised", "disabled", "unelevated", "stroked", "primary", "secondary"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"+key);
+                }
+                delete result[key];
+            }
+            delete result.icon;
+            delete result.href;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>

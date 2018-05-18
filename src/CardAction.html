@@ -1,0 +1,26 @@
+<div {...attrs}>
+    <slot></slot>
+</div>
+<link rel="stylesheet" type="text/css" href="@material/card/dist/mdc.card.css" />
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            var result = Object.assign({}, attributes);
+            var cls ="mdc-card__actions";
+            var classes = [cls];
+            if (result.full) {
+                classes.push(cls+"--full-bleed");
+            }
+            delete result.full;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>

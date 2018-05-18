@@ -1,0 +1,23 @@
+<i ref:icon {...attrs}><slot></slot></i>
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let classes = ["material-icons"];
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    },
+	methods: {
+		getElement() {
+			return this.refs.icon;
+		}
+	}
+}
+</script>

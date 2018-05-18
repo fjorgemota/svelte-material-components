@@ -1,0 +1,21 @@
+<div {...attrs}>
+    <slot></slot>
+</div>
+<link rel="stylesheet" type="text/css" href="@material/card/dist/mdc-card.css" />
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            var result = Object.assign({}, attributes);
+            var classes = ["mdc-card__media--content"];
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            delete result.attrs;
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
