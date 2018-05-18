@@ -1,14 +1,21 @@
 {
-  "name": "material",
-  "version": "1.0.0",
-  "description": "",
+  "name": "svelte-material-components",
+  "version": "0.1.0",
+  "description": "svelte wrapper for \"Material Components for the web\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Fernando Jorge Mota <contato@fjorgemota.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fjorgemota/svelte-material-components.git"
+  },
+  "devDependencies": {
+    "svelte": "^2.6.3"
+  },
   "dependencies": {
-    "svelte": "^2.5.0"
+    "material-components-web": "^0.35.1"
   }
 }
