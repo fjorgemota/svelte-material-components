@@ -1,0 +1,28 @@
+<ul {...attrs}>
+  <spot></spot>
+</ul>
+
+<script>
+import {processAttributes, formatString} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-image-list";
+            let classes = [cls];
+            for (let key of ["masonry", "withTextProtection"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"formatString(key));
+                }
+                delete result[key];
+            }
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
