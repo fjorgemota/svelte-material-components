@@ -1,0 +1,68 @@
+<div {...attrs}><spot></spot></div>
+
+
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-layout-grid__cell";
+            let classes = [cls];
+            if (result.cols) {
+                classes.push(cls+"--span-"+result.cols);
+            }
+            if (result.desktopCols) {
+                classes.push(cls+"--span-"+result.desktopCols+"-desktop");
+            }
+            if (result.tabletCols) {
+                classes.push(cls+"--span-"+result.tabletCols+"-tablet");
+            }
+            if (result.phoneCols) {
+                classes.push(cls+"--span-"+result.phoneCols+"-mobile");
+            }
+            if (result.order) {
+                classes.push(cls+"--order-"+result.order);
+            }
+            if (result.align) {
+                classes.push(cls+"--align-"+result.align);
+            }
+            if (result.fixedColumnWidth) {
+                classes.push(cls+"--fixed-column-width");
+            }
+            delete result.cols;
+            delete result.desktopCols;
+            delete result.tabletCols;
+            delete result.phoneCols;
+            delete result.order;
+            delete result.fixedColumnWidth;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    },
+    onstate({current}) {
+        for(let [key, min, max] of [["cols", 1, 12], ["desktopCols", 1, 12], ["tabletCols", 1, 8], ["phoneCols", 1, 4], ["order", 1, 2]]) {
+            let value = parseInt(current[key]);
+            if (!value) {
+                continue;
+            }
+            if (isNaN(value) || (typeof current[key] === "number" && value !== current[key])) {
+                throw new Error(`"${key}" should be an integer`);
+            }
+            if (value < min) {
+                throw new Error(`"${key}" should be bigger or equal to ${min}, but it's only ${value}`);
+            }
+            if (value > max) {
+                throw new Error(`"${key}" should be less or equal to ${max}, but it's only ${value}`);
+            }
+        }
+        if (current.align && ['top', 'middle', 'botton'].includes(current.align)) {
+            throw new Error(`Invalid value for "align" attribute: "${current.align}", should be "top", "middle" or "bottom"`);
+        }
+    }
+};
+</script>
