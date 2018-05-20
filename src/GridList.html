@@ -1,21 +1,25 @@
 <div {...attrs}>
   <ul class="mdc-grid-list__tiles">
-    
+      <spot></spot>
   </ul>
 </div>
 
 <script>
-import {processAttributes} from './helpers.js';
+import {processAttributes, formatString} from './helpers.js';
+import {MDCGridList} from '@material/grid-list'
 export default {
-    components: {
-        Icon: "./Icon.html"
+    oncreate() {
+        this.mdcComponent = new MDCGridList(this.refs.dialog);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
     },
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls ="mdc-grid-list";
             let classes = [cls];
-            switch (attributes.padding) {
+            switch (result.padding) {
               case "1":
               case 1:
                 classes.push(cls+"--tile-gutter-1");
@@ -24,39 +28,39 @@ export default {
               case 4:
                 break;
               default:
-                throw new Error("Padding has invalid value: detected '"+attributes.padding+"', should be 1 or 4");
+                throw new Error("Padding has invalid value: detected '"+result.padding+"', should be 1 or 4");
             }
-            delete attributes.padding;
-            switch (attributes.iconAlign) {
+            delete result.padding;
+            switch (result.iconAlign) {
               case "start":
               case "end":
-                classes.push(cls+"--with-icon-align-"+attributes.iconAlign);
+                classes.push(cls+"--with-icon-align-"+result.iconAlign);
                 break;
               default:
-                if (attributes.iconAlign) {
-                  throw new Error("iconAlign has invalid value: detected '"+attributes.iconAlign+"', should be 'start' or 'end'");
+                if (result.iconAlign) {
+                  throw new Error("iconAlign has invalid value: detected '"+result.iconAlign+"', should be 'start' or 'end'");
                 }
             }
-            delete attributes.iconAlign;
-            switch (attributes.tileAspect) {
+            delete result.iconAlign;
+            switch (result.tileAspect) {
               case "1x1":
               case "16x9":
               case "2x3":
               case "3x2":
               case "4x3":
               case "3x4":
-                classes.push(cls+"--tile-aspect-"+attributes.tileAspect);
+                classes.push(cls+"--tile-aspect-"+result.tileAspect);
                 break;
               default:
-                if (attributes.tileAspect) {
-                  throw new Error("tileAspect has invalid value: detected '"+attributes.tileAspect+"', should be '1x1', '16x9', '2x3', '3x2', '4x3' or '3x4'.");
+                if (result.tileAspect) {
+                  throw new Error("tileAspect has invalid value: detected '"+result.tileAspect+"', should be '1x1', '16x9', '2x3', '3x2', '4x3' or '3x4'.");
                 }
             }
-            delete attributes.tileAspect;
-            
+            delete result.tileAspect;
+
             for (let key of ["headerCaption", "twolineCaption"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+key);
+                    classes.push(cls+"--"+formatString(key));
                 }
                 delete result[key];
             }

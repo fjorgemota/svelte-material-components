@@ -1,0 +1,27 @@
+<li class="mdc-grid-tile">
+  <div class="mdc-grid-tile__primary">
+    {if bgImage}
+    <div class="mdc-grid-tile__primary-content" style="background-image: url({src});"></div>
+    {else}
+    <img class="mdc-grid-tile__primary-content" src="{src}" alt="{title}" />
+    {/if}
+  </div>
+  {if title}
+  <span class="mdc-grid-tile__secondary">
+    {if icon}
+    <Icon class="mdc-grid-tile__icon material-icons">{icon}</Icon>
+    {/if}
+    <span class="mdc-grid-tile__title">{title}</span>
+    {if supportText}
+    <span class="mdc-grid-tile__support-text">{supportText}</span>
+    {/if}
+  </span>
+  {/if}
+</li>
+<script>
+export default {
+    components: {
+        Icon: './Icon.html'
+    }
+}
+</script>
