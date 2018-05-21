@@ -1,12 +1,12 @@
 <li class="mdc-image-list__item">
-  {if aspectContainer}
+  {#if aspectContainer}
       <div class="mdc-image-list__image-aspect-container">
         <img class="mdc-image-list__image" src="{src}" />
       </div>
-  {else}
+  {:else}
       <img class="mdc-image-list__image" src="{src}" />
   {/if}
-  {if textLabel}
+  {#if textLabel}
       <div class="mdc-image-list__supporting">
         <span class="mdc-image-list__label">{textLabel}</span>
       </div>
