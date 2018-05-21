@@ -1,0 +1,40 @@
+<div refs:progressbar class="mdc-linear-progress">
+  <div class="mdc-linear-progress__buffering-dots"></div>
+  <div class="mdc-linear-progress__buffer"></div>
+  <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+  </div>
+  <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+    <span class="mdc-linear-progress__bar-inner"></span>
+  </div>
+</div>
+<script>
+import { MDCLinearProgress } from '@material/linear-progress';
+export default {
+    data() {
+        return {
+            "open": true
+        }
+    },
+    oncreate() {
+        this.mdcComponent = new MDCLinearProgress(this.refs.progressbar);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onupdate({current, changed}) {
+        if (changed.open) {
+            if (current.open) {
+                this.mdcComponent.open();
+            } else {
+                this.mdcComponent.close();
+            }
+        }
+        for (var key of ["reverse", "progress", "buffer", "determinate"]) {
+            if (changed[key]) {
+                this.mdcComponent[key] = current[key];
+            }
+        }
+    }
+}
+</script>
