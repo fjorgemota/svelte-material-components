@@ -16,6 +16,6 @@
     "svelte": "^2.6.3"
   },
   "dependencies": {
-    "material-components-web": "^0.35.1"
+    "material-components-web": "^0.35.2"
   }
 }
