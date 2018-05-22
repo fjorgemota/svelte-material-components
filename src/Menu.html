@@ -1,0 +1,57 @@
+<div ref:menu tabindex="-1" class="mdc-menu">
+  <List class="mdc-menu__items" role="menu" ariaHidden="true">
+    <spot></spot>
+  </List>
+</div>
+
+<script>
+import {processAttributes, formatString} from './helpers.js';
+import {MDCMenu, Corner} from '@material/menu';
+export default {
+    components: {
+        List: "./List.html"
+    },
+    data() {
+        return {
+            open: false,
+            selected: null
+        };
+    },
+    setup(Menu) {
+		Menu.Corner = Corner;
+	},
+    oncreate() {
+        this.mdcComponent = new MDCMenu(this.refs.menu);
+        this.mdcComponent.listen('MDCMenu:cancel', () => {
+            this.fire("cancel");
+            this.set({"open": false, "selected": null});
+        });
+        this.mdcComponent.listen('MDCMenu:selected', (obj) => {
+            this.fire("selected", obj);
+            this.set({"open": false, "selected": obj.detail.index});
+        });
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onstate({current, changed}) {
+        if (changed.open && current.open !== this.mdcComponent.open) {
+            this.mdcComponent.open = current.open;
+        }
+        if (changed.quickOpen) {
+            this.mdcComponent.quickOpen = current.quickOpen;
+        }
+        if (changed.anchorCorner) {
+            this.mdcComponent.setAnchorCorner(current.anchorCorner);
+        }
+        if (changed.anchorMargin) {
+            this.mdcComponent.setAnchorMargin(current.anchorMargin);
+        }
+    },
+    methods: {
+        showItem(number) {
+            this.mdcComponent.show(number);
+        }
+    }
+};
+</script>

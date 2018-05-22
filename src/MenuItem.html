@@ -1,0 +1,34 @@
+<ListItem {...attrs}>
+    <spot></spot>
+</ListItem>
+
+<script>
+export default {
+    components: {
+        ListItem: './ListItem.html'
+    },
+    data() {
+        return {
+            showMeta: false,
+            showGraphic: false
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({"role": "menuitem"}, attributes);
+            if (result.disabled) {
+                result.tabindex = "-1";
+                result.ariaDisabled = "true";
+            }
+            for (let key of ["selected", "disabled", "activated", "primaryText", "secondText", "showGraphic", "showMeta", "attrs"])  {
+                delete result[key];
+            }
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
