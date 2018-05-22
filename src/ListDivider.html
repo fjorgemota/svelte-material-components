@@ -1,0 +1,31 @@
+{#if inList}
+<li {...attrs}></li>
+{:else}
+<hr {...attrs} />
+{/if}
+<script>
+import {processAttributes} from './helpers.js';
+export default {
+    data() {
+        return {
+            "inList": false
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let classes = ["mdc-list-divider"];
+            if (result.inList) {
+                result.role = "separator";
+            }
+            delete result.inList;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
