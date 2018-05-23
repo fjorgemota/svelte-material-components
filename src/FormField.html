@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="@material/form-field/dist/mdc.form-field.css" />
 <script>
 import {MDCFormField} from '@material/form-field';
-import {processAttributes} from './helpers.js';
+import {processAttributes, formatString} from './helpers.js';
 export default {
     oncreate() {
         this.mdcComponent = new MDCFormField(this.refs.formfield);
@@ -23,11 +23,14 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-form-field";
             let classes = [cls];
-            let key = "align-end";
+            let key = "alignEnd";
             if (result[key]) {
-                classes.push(cls+"--"+key);
+                classes.push(cls+"--"+formatString(key));
             }
             delete result[key];
+            for (let key of ["attrs", "label", "id"]) {
+                delete result[key];
+            }
             if (result["class"]) {
                 classes.push(result["class"]);
             }
