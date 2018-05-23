@@ -1,0 +1,58 @@
+<div ref:select {...attrs}>
+  <select class="mdc-select__native-control" name="{name} id="{id}>
+      <slot></slot>
+  </select>
+  <label class="mdc-floating-label">{label}</label>
+  <div class="mdc-line-ripple"></div>
+</div>
+<script>
+import {MDCSelect} from '@material/radio';
+import {processAttributes} from './helpers.js';
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCSelect(this.refs.select);
+        this.mdcComponent.listen("change", () => {
+            this.fire("change");
+            this.set({
+                "value": this.mdcComponent.value,
+                "selectedIndex": this.mdcComponent.selectedIndex,
+            })
+        })
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onstate({current, changed}) {
+        for (let key of ["value", "selectedIndex", "disabled"]) {
+            if (changed[key]) {
+                this.mdcComponent[key] = current[key];
+            }
+        }
+    }
+    computed: {
+        attrs() {
+            let result = Object.assign({}, attributes);
+            let cls = "mdc-select";
+            let classes = [cls];
+            let key = "box";
+            if (result[key]) {
+                classes.push(cls+"--"+key);
+            }
+            delete result[key];
+            for (let key of ["attrs", "id", "name", "value", "selectedIndex", "disabled"]) {
+                delete result[key];
+            }
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+    methods: {
+        getMDCField() {
+            return this.mdcComponent;
+        }
+    }
+}
+</script>
