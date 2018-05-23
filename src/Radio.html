@@ -1,0 +1,55 @@
+<div ref:radio {...attrs}>
+    <input class="mdc-radio__native-control" type="radio" id="{id}" name="{name}">
+    <div class="mdc-radio__background">
+      <div class="mdc-radio__outer-circle"></div>
+      <div class="mdc-radio__inner-circle"></div>
+    </div>
+</div>
+<script>
+import {MDCRadio} from '@material/radio';
+import {processAttributes, formatString} from './helpers.js';
+const attrKeys = ["value", "checked", "disabled"];
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCRadio(this.refs.radio);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onstate({current, changed}) {
+        for (let key of attrKeys) {
+            if (changed[key]) {
+                this.mdcComponent[key] = current[key];
+            }
+        }
+    }
+    computed: {
+        attrs() {
+            let result = Object.assign({}, attributes);
+            let cls = "mdc-radio";
+            let classes = [cls];
+            let key = "disabled";
+            if (result[key]) {
+                classes.push(cls+"--"+key);
+            }
+            delete result[key];
+            for (let key of attrKeys) {
+                delete result[key];
+            }
+            delete result.attrs;
+            delete result.id;
+            delete result.name;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+    methods: {
+        getMDCField() {
+            return this.mdcComponent;
+        }
+    }
+}
+</script>
