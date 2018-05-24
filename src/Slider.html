@@ -1,0 +1,72 @@
+<div ref:slider {...attrs}>
+  <div class="mdc-slider__track-container">
+    <div class="mdc-slider__track"></div>
+    {#if displayMarkers}
+    <div class="mdc-slider__track-marker-container"></div>
+    {/if}
+  </div>
+  <div class="mdc-slider__thumb-container">
+    {#if discrete}
+    <div class="mdc-slider__pin">
+      <span class="mdc-slider__pin-value-marker"></span>
+    </div>
+    {/if}
+    <svg class="mdc-slider__thumb" width="21" height="21">
+      <circle cx="10.5" cy="10.5" r="7.875"></circle>
+    </svg>
+    <div class="mdc-slider__focus-ring"></div>
+  </div>
+</div>
+<link rel="stylesheet" type="text/css" href="@material/button/dist/mdc.button.css" />
+<script>
+import {processAttributes, formatString} from './helpers.js';
+import {MDCSlider} from '@material/slider';
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCSlider(this.refs.slider);
+        this.mdcComponent.listen("MDCSlider:input", () => {
+            this.fire("input", {value: this.mdcComponent.value});
+        });
+        this.mdcComponent.listen("MDCSlider:change", () => {
+            this.set({value: this.mdcComponent.value});
+            this.fire({value: this.mdcComponent.value});
+        });
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onstate({current, changed}) {
+        for (let key of ["value", "min", "max", "step", "disabled"]) {
+            if (changed[key]) {
+                this.mdcComponent[key] = current[key];
+            }
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({
+                "tabindex": "0",
+                "role": "slider"
+            }, attributes);
+            let cls = "mdc-slider";
+            let classes = [cls];
+            if (result.label) {
+                result.ariaLabel = result.label;
+            }
+            delete result.label;
+            for (let key of ["discrete", "displayMarkers"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"+formatString(key));
+                }
+                delete result[key];
+            }
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
