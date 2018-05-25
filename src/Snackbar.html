@@ -1,0 +1,36 @@
+<div ref:snackbar class="mdc-snackbar {alignStart?'mdc-snackbar--align-start': ''}" aria-live="assertive"  aria-atomic="true"  aria-hidden="true">
+  <div class="mdc-snackbar__text"></div>
+  <div class="mdc-snackbar__action-wrapper">
+    <button type="button" class="mdc-snackbar__action-button"></button>
+  </div>
+</div>
+<link rel="stylesheet" type="text/css" href="@material/snackbar/dist/mdc.snackbar.css" />
+<script>
+import {processAttributes, formatString} from './helpers.js';
+import {MDCSnackbar} from '@material/snackbar';
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCSnackbar(this.refs.snackbar);
+        this.mdcComponent.listen("MDCSnackbar:show", () => {
+            this.fire("show");
+        });
+        this.mdcComponent.listen("MDCSnackbar:hide", () => {
+            this.fire("hide");
+        });
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onstate({current, changed}) {
+        if (changed.dismissesOnAction) {
+            this.mdcComponent.dismissesOnAction = current.dismissesOnAction;
+
+        }
+    }
+    methods: {
+        show(args) {
+            return this.mdcComponent.show(args);
+        }
+    }
+};
+</script>
