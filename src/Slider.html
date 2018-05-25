@@ -17,7 +17,7 @@
     <div class="mdc-slider__focus-ring"></div>
   </div>
 </div>
-<link rel="stylesheet" type="text/css" href="@material/button/dist/mdc.button.css" />
+<link rel="stylesheet" type="text/css" href="@material/slider/dist/mdc.slider.css" />
 <script>
 import {processAttributes, formatString} from './helpers.js';
 import {MDCSlider} from '@material/slider';
@@ -29,7 +29,7 @@ export default {
         });
         this.mdcComponent.listen("MDCSlider:change", () => {
             this.set({value: this.mdcComponent.value});
-            this.fire({value: this.mdcComponent.value});
+            this.fire("change", {value: this.mdcComponent.value});
         });
     },
     ondestroy() {
