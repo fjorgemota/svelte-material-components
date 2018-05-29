@@ -1,0 +1,52 @@
+<nav ref:tabs {...attrs}>
+  <slot></slot>
+  <span class="mdc-tab-bar__indicator"></span>
+</nav>
+<script>
+import {MDCTabBar, MDCTabBarFoundation} from '@material/tabs';
+import {formatString, processAttributes} from './helpers.js';
+export default {
+    oncreate() {
+        if (this.root && this.root.getTabsComponent) {
+            this.mdcComponent = this.root.getTabsComponent();
+        } else {
+            this.mdcComponent = new MDCTabBar(this.refs.tabs);
+        }
+        this.mdcComponent.listen("MDCTabBar:change", () => {
+            this.fire("change", {"activeTabIndex": this.mdcComponent.activeTabIndex});
+            this.set({"activeTabIndex": this.mdcComponent.activeTabIndex});
+        })
+    },
+    ondestroy() {
+        if (!this.root || !this.root.getTabsComponent) {
+            this.mdcComponent.destroy();
+        }
+    },
+    onstate({current, changed}) {
+        if (changed.activeTabIndex && this.mdcComponent.activeTabIndex !== current.activeTabIndex) {
+            this.mdcComponent.activeTabIndex = current.activeTabIndex;
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-tab-bar";
+            let classes = [cls];
+            for (let key of ["iconTabBar", "iconsWithText"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"+formatString(key));
+                }
+                delete result[key];
+            }
+            delete result.attrs;
+            delete result.activeTabIndex;
+            delete result.mdcComponent;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+}
+</script>

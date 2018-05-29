@@ -1,0 +1,51 @@
+<nav ref:tabs>
+  <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back">
+    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scrollBackLabel}">
+      {scrollBackIcon}
+    </a>
+  </div>
+  <Tabs on:change {...attrs}><slot></slot></Tabs>
+  <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward">
+    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scrollForwardLabel}">
+        {scrollBackNext}
+    </a>
+  </div>
+</nav>
+<script>
+import {MDCTabBarScroller, MDCTabBarFoundation} from '@material/tabs';
+export default {
+    data() {
+        return {
+            "scrollBackLabel": "scroll back button",
+            "scrollBackIcon": "navigate_before",
+            "scrollForwardLabel": "scroll forward button",
+            "scrollForwardIcon": "navigate_next"
+        }
+    }
+    oncreate() {
+        this.mdcComponent = new MDCTabBarScroller(this.refs.tabs);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    methods: {
+        getTabsComponent() {
+            return this.mdcComponent.tabs;
+        }
+    }
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            for (let key of ["attrs", "scrollBackIcon", "scrollBackLabel", "scrollForwardIcon", "scrollBackLabel"]) {
+                delete result[key];
+            }
+            let classes = ["mdc-tab-bar-scroller__scroll-frame__tabs"];
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return result;
+        }
+    }
+}
+</script>

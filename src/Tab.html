@@ -1,0 +1,24 @@
+<a ref:tab class="mdc-tab {(icon && !iconOnly) ?'mdc-tab--with-icon-and-text': ''}" href="#{href}">
+    {#if icon}
+        <Icon class="mdc-tab__icon" ariaHiden="true">{icon}</Icon>
+        {#if !iconOnly}
+            <span class="mdc-tab__icon-text"><slot></slot></span>
+        {/if}
+    {else}
+        <slot></slot>
+    {/if}
+    <span class="mdc-tab__indicator"></span>
+ </a>
+ <script>
+ export default {
+     components: {
+         Icon: './Icon.html'
+     },
+     data() {
+         return {
+             icon: null,
+             iconOnly: false
+         }
+     }
+ }
+ </script>
