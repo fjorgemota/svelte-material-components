@@ -1,6 +1,6 @@
 <a ref:tab class="mdc-tab {(icon && !iconOnly) ?'mdc-tab--with-icon-and-text': ''}" href="#{href}">
     {#if icon}
-        <Icon class="mdc-tab__icon" ariaHiden="true">{icon}</Icon>
+        <Icon class="mdc-tab__icon">{icon}</Icon>
         {#if !iconOnly}
             <span class="mdc-tab__icon-text"><slot></slot></span>
         {/if}
