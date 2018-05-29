@@ -11,6 +11,7 @@ export default {
                 classes.push(result["class"]);
             }
             result["class"] = classes.join(" ");
+            result["ariaHidden"] = "true";
             return processAttributes(result);
         }
     },
