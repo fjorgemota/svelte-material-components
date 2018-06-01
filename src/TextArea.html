@@ -1,0 +1,90 @@
+<div ref:textArea {...attrs}>
+  {#if leadingIcon}
+    <Icon ref:leadingIcon class="mdc-text-field__icon" tabindex="0" role="button">{leadingIcon}</Icon>
+  {/if}
+  <textarea id="{id}" name="{name}" class="mdc-text-field__input" disabled={disabled} rows="{rows}" cols="{cols}" {...inputAttrs}>{value}</textarea>
+  {#if hintText}
+    <label class="mdc-floating-label" for="{id}">{hintText}</label>
+  {/if}
+  {#if trailingIcon}
+    <Icon ref:trailingIcon class="mdc-text-field__icon" tabindex="0" role="button">{trailingIcon}</Icon>
+  {/if}
+  {#if outlined}
+    <div class="mdc-notched-outline">
+      <svg>
+        <path class="mdc-notched-outline__path"/>
+      </svg>
+    </div>
+    <div class="mdc-notched-outline__idle"></div>
+  {/if}
+</div>
+{#if helperText}
+<p ref:helperText id="{id}-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+  {helperText}
+</p>
+{/if}
+<script>
+import {MDCTextField} from "@material/textfield";
+import {MDCTextFieldIcon} from '@material/textfield/icon';
+
+import {processAttributes, formatString} from "./helpers.js";
+const iconsKeys = ["trailingIcon", "leadingIcon"];
+export default {
+    components: {
+        Icon: "./Icon.html"
+    },
+    oncreate() {
+        this.mdcComponent = new MDCTextField(this.refs.textArea);
+    },
+    onstate({current, changed}) {
+        for (let key of mdcAttrs) {
+            if (changed[key]) {
+                this.mdcComponent[key] = current[key];
+            }
+        }
+        for (let key of ["iconMode", "helperText", "outlined", "hintText"]) {
+            if (changed[key]) {
+                this.mdcComponent.destroy();
+                this.mdcComponent = new MDCTextField(this.refs.textArea);
+                break;
+            }
+        }
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    computed: {
+        inputAttrs ({placeholder, helperText, id}) {
+            var result = {};
+            if (helperText) {
+                let elem = id+"-helper-text";
+                result["aria-controls"] = elem;
+                result["aria-describedby"] = elem;
+            }
+            return result;
+        },
+        attrs (attributes) {
+            let result = {...attributes};
+            let cls ="mdc-text-field";
+            result.textarea = true;
+            for (let key of ["box", "textarea", "dense", "fullwidth", "outlined", "disabled", "focused", ...iconsKeys]) {
+                if (result[key]) {
+                    if (iconsKeys.includes(key)) {
+                        key = "with-"+key;
+                    }
+                    classes.push(cls+"--"+formatString(key));
+                }
+                delete result[key];
+            }
+            for (let key of ["attrs", "id", "name", "type", "helperText", "rows", "cols", "inputAttrs", ...mdcAttrs]) {
+                delete result[key];
+            }
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
