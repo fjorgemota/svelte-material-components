@@ -1,0 +1,22 @@
+<Icon {...attrs}><slot></slot></Icon>
+<script>
+import {processAttributes, formatString} from './helpers.js';
+export default {
+    components: {
+        Icon: "./Icon.html"
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let classes = ["mdc-toolbar__"+(!!result.menu ? "menu" : "")+"icon"];
+            delete result.menu;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
