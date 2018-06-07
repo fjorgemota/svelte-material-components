@@ -1,10 +1,16 @@
-<header {...attrs}>
-  <slot></slot>
-</header>
+<header ref:toolbar {...attrs}><slot></slot></header>
 
 <script>
 import {processAttributes, formatString} from './helpers.js';
+import {MDCToolbar} from '@material/toolbar';
+
 export default {
+    oncreate() {
+        this.mdcComponent = new MDCToolbar(this.refs.toolbar);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);

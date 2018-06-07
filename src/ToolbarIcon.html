@@ -8,7 +8,7 @@ export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
-            let classes = ["mdc-toolbar__"+(!!result.menu ? "menu" : "")+"icon"];
+            let classes = ["mdc-toolbar__"+(!!result.menu ? "menu-" : "")+"icon"];
             delete result.menu;
             delete result.attrs;
             if (result["class"]) {
