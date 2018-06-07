@@ -1,0 +1,39 @@
+<header {...attrs}>
+  <slot></slot>
+</header>
+
+<script>
+import {processAttributes, formatString} from './helpers.js';
+import {MDCTopAppBar} from '@material/top-app-bar';
+
+export default {
+    oncreate() {
+        this.mdcComponent = new MDCToolbar(this.refs.toolbar);
+        this.mdcComponent.listen("MDCTopAppBar:nav", () => {
+            this.emit("nav");
+        })
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-top-app-bar";
+            let classes = [cls];
+            for (let key of ["short", "shortCollapsed", "fixed", "prominent", "dense", "prominent"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"+formatString(key));
+                }
+                delete result[key];
+            }
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>

@@ -1,0 +1,29 @@
+<section {...attrs}>
+    <slot></slot>
+</section>
+
+<script>
+import {processAttributes, formatString} from './helpers.js';
+export default {
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="mdc-top-app-bar__section";
+            let classes = [cls];
+            let k = "align";
+            if (let v = result[k]) {
+                if (v === "start" || v === "end") {
+                    classes.push(cls+"--"+k+"-"+v);
+                }
+                delete result[k];
+            }
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
