@@ -1,0 +1,32 @@
+<span {...attrs}><slot></slot></span>
+
+<script>
+import {processAttributes, formatString} from './helpers.js';
+var validTypes = ["caption", "button", "overline"];
+for (let i=1; i < 7; ++i) {
+    if (i < 3) {
+        validTypes.push("body"+i);
+        validTypes.push("subtitle"+i);
+    }
+    validTypes.push("headline"+i);
+}
+export default {
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls ="";
+            let classes = ["mdc-mdc-typography"+(result.type?"--"+result.type : "")];
+            if (result.type && !validTypes.includes(result.type)) {
+                throw new Error(`Invalid type '${result.type}'}`);
+            }
+            delete result.type;
+            delete result.attrs;
+            if (result["class"]) {
+                classes.push(result["class"]);
+            }
+            result["class"] = classes.join(" ");
+            return processAttributes(result);
+        }
+    }
+};
+</script>
