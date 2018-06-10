@@ -55,7 +55,7 @@ export default {
         this.mdcComponent.destroy();
     },
     computed: {
-        inputAttrs({helperText, id} as obj) {
+        inputAttrs({helperText, id}) {
             var result = {};
             if (helperText) {
                 let elem = id+"-helper-text";
