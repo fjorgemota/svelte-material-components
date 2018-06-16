@@ -1,5 +1,5 @@
 <div ref:select {...attrs}>
-  <select class="mdc-select__native-control" name="{name} id="{id}>
+  <select class="mdc-select__native-control" name="{name}" id="{id}">
       <slot></slot>
   </select>
   <label class="mdc-floating-label">{label}</label>
@@ -28,9 +28,9 @@ export default {
                 this.mdcComponent[key] = current[key];
             }
         }
-    }
+    },
     computed: {
-        attrs() {
+        attrs(attributes) {
             let result = Object.assign({}, attributes);
             let cls = "mdc-select";
             let classes = [cls];
@@ -48,7 +48,7 @@ export default {
             result["class"] = classes.join(" ");
             return processAttributes(result);
         }
-    }
+    },
     methods: {
         getMDCField() {
             return this.mdcComponent;

@@ -22,9 +22,9 @@ export default {
                 this.mdcComponent[key] = current[key];
             }
         }
-    }
+    },
     computed: {
-        attrs() {
+        attrs(attributes) {
             let result = Object.assign({}, attributes);
             let cls = "mdc-radio";
             let classes = [cls];
@@ -45,7 +45,7 @@ export default {
             result["class"] = classes.join(" ");
             return processAttributes(result);
         }
-    }
+    },
     methods: {
         getMDCField() {
             return this.mdcComponent;

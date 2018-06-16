@@ -11,7 +11,8 @@ export default {
             let cls ="mdc-top-app-bar__section";
             let classes = [cls];
             let k = "align";
-            if (let v = result[k]) {
+            let v;
+            if (v = result[k]) {
                 if (v === "start" || v === "end") {
                     classes.push(cls+"--"+k+"-"+v);
                 }

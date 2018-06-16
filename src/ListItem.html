@@ -39,7 +39,7 @@ export default {
             let classes = [cls];
             for (let key of ["selected", "activated"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"formatString(key));
+                    classes.push(cls+"--"+formatString(key));
                 }
                 delete result[key];
             }

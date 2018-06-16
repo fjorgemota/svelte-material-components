@@ -19,10 +19,11 @@ export default {
             'textLabel': null,
             'aspectContainer': true
         }
-    }
+    },
     onstate({current}) {
         if (!current.src) {
             throw new Error("Attribute 'src' should be defined");
         }
     }
 }
+</script>
