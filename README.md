@@ -15,3 +15,4 @@ This project delivers [Svelte](https://svelte.technology/) components for [Mater
 - [ ] Tests;
 - [ ] Documentation;
 - [ ] Examples;
+- [ ] Guarantee that we are using good practices. For example...should we allow the user to customize the attributes of the root element of the component? I'm still thinking about that.
