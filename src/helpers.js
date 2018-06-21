@@ -5,7 +5,7 @@ function formatChar(char) {
 }
 
 export function formatString(str) {
-    return str.replace(str, formatChar);
+    return str.replace(uppercase, formatChar);
 }
 
 export function processAttributes(attrs) {
