@@ -24,7 +24,7 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-button";
             let classes = [cls];
-            for (let key of ["ripple", "dense", "raised", "disabled", "unelevated", "stroked", "primary", "secondary"]) {
+            for (let key of ["ripple", "dense", "raised", "disabled", "unelevated",  "outlined", "primary", "secondary"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+key);
                 }
