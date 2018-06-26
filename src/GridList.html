@@ -31,34 +31,34 @@ export default {
                 throw new Error("Padding has invalid value: detected '"+result.padding+"', should be 1 or 4");
             }
             delete result.padding;
-            switch (result.iconAlign) {
+            switch (result.icon_align) {
               case "start":
               case "end":
-                classes.push(cls+"--with-icon-align-"+result.iconAlign);
+                classes.push(cls+"--with-icon-align-"+result.icon_align);
                 break;
               default:
                 if (result.iconAlign) {
                   throw new Error("iconAlign has invalid value: detected '"+result.iconAlign+"', should be 'start' or 'end'");
                 }
             }
-            delete result.iconAlign;
-            switch (result.tileAspect) {
+            delete result.icon_align;
+            switch (result.tile_aspect) {
               case "1x1":
               case "16x9":
               case "2x3":
               case "3x2":
               case "4x3":
               case "3x4":
-                classes.push(cls+"--tile-aspect-"+result.tileAspect);
+                classes.push(cls+"--tile-aspect-"+result.tile_aspect);
                 break;
               default:
                 if (result.tileAspect) {
                   throw new Error("tileAspect has invalid value: detected '"+result.tileAspect+"', should be '1x1', '16x9', '2x3', '3x2', '4x3' or '3x4'.");
                 }
             }
-            delete result.tileAspect;
+            delete result.tile_aspect;
 
-            for (let key of ["headerCaption", "twolineCaption"]) {
+            for (let key of ["header_caption", "twoline_caption"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }

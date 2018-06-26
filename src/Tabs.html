@@ -13,8 +13,8 @@ export default {
             this.mdcComponent = new MDCTabBar(this.refs.tabs);
         }
         this.mdcComponent.listen("MDCTabBar:change", () => {
-            this.fire("change", {"activeTabIndex": this.mdcComponent.activeTabIndex});
-            this.set({"activeTabIndex": this.mdcComponent.activeTabIndex});
+            this.fire("change", {"active_tab_index": this.mdcComponent.active_tab_index});
+            this.set({"active_tab_index": this.mdcComponent.active_tab_index});
         })
     },
     ondestroy() {
@@ -23,8 +23,8 @@ export default {
         }
     },
     onstate({current, changed}) {
-        if (changed.activeTabIndex && this.mdcComponent.activeTabIndex !== current.activeTabIndex) {
-            this.mdcComponent.activeTabIndex = current.activeTabIndex;
+        if (changed.active_tab_index && this.mdcComponent.active_tab_index !== current.active_tab_index) {
+            this.mdcComponent.active_tab_index = current.active_tab_index;
         }
     },
     computed: {
@@ -32,15 +32,14 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-tab-bar";
             let classes = [cls];
-            for (let key of ["iconTabBar", "iconsWithText"]) {
+            for (let key of ["icon_tab_bar", "icons_with_text"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }
                 delete result[key];
             }
             delete result.attrs;
-            delete result.activeTabIndex;
-            delete result.mdcComponent;
+            delete result.active_tab_index;
             if (result["class"]) {
                 classes.push(result["class"]);
             }

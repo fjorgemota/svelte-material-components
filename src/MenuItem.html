@@ -20,7 +20,7 @@ export default {
                 result.tabindex = "-1";
                 result.ariaDisabled = "true";
             }
-            for (let key of ["selected", "disabled", "activated", "primaryText", "secondText", "showGraphic", "showMeta", "attrs"])  {
+            for (let key of ["selected", "disabled", "activated", "primary_text", "second_text", "show_graphic", "show_meta", "attrs"])  {
                 delete result[key];
             }
             if (result["class"]) {

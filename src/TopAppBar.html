@@ -21,7 +21,7 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-top-app-bar";
             let classes = [cls];
-            for (let key of ["short", "shortCollapsed", "fixed", "prominent", "dense", "prominent"]) {
+            for (let key of ["short", "short_collapsed", "fixed", "prominent", "dense"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }

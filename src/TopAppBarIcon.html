@@ -9,7 +9,7 @@ export default {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls = "mdc-toolbar__";
-            for (let key of ["navigationIcon", "actionItem"]) {
+            for (let key of ["navigation_icon", "action_item"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                     break;

@@ -1,7 +1,7 @@
 <div ref:slider {...attrs}>
   <div class="mdc-slider__track-container">
     <div class="mdc-slider__track"></div>
-    {#if displayMarkers}
+    {#if display_markers}
     <div class="mdc-slider__track-marker-container"></div>
     {/if}
   </div>
@@ -53,7 +53,7 @@ export default {
                 result.ariaLabel = result.label;
             }
             delete result.label;
-            for (let key of ["discrete", "displayMarkers"]) {
+            for (let key of ["discrete", "display_markers"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }

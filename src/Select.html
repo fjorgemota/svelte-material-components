@@ -15,7 +15,7 @@ export default {
             this.fire("change");
             this.set({
                 "value": this.mdcComponent.value,
-                "selectedIndex": this.mdcComponent.selectedIndex,
+                "selected_index": this.mdcComponent.selected_index,
             })
         })
     },
@@ -23,7 +23,7 @@ export default {
         this.mdcComponent.destroy();
     },
     onstate({current, changed}) {
-        for (let key of ["value", "selectedIndex", "disabled"]) {
+        for (let key of ["value", "selected_index", "disabled"]) {
             if (changed[key]) {
                 this.mdcComponent[key] = current[key];
             }
@@ -39,7 +39,7 @@ export default {
                 classes.push(cls+"--"+key);
             }
             delete result[key];
-            for (let key of ["attrs", "id", "name", "value", "selectedIndex", "disabled"]) {
+            for (let key of ["attrs", "id", "name", "value", "selected_index", "disabled"]) {
                 delete result[key];
             }
             if (result["class"]) {

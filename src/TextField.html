@@ -1,12 +1,12 @@
 <div ref:textField {...attrs}>
-  {#if icon && iconMode === "leading"}
+  {#if icon && icon_mode === "leading"}
     <Icon class="mdc-text-field__icon" tabindex="0" role="button">{icon}</Icon>
   {/if}
   <input type="{type}" id="{id}" name="{name}" class="mdc-text-field__input" disabled={disabled} {...inputAttrs}>
-  {#if hintText}
-    <label class="mdc-floating-label" for="{id}">{hintText}</label>
+  {#if hint_text}
+    <label class="mdc-floating-label" for="{id}">{hint_text}</label>
   {/if}
-  {#if icon && iconMode === "trailing"}
+  {#if icon && icon_mode === "trailing"}
     <Icon class="mdc-text-field__icon" tabindex="0" role="button">{icon}</Icon>
   {/if}
   {#if outlined}
@@ -20,16 +20,16 @@
     <div class="mdc-line-ripple"></div>
   {/if}
 </div>
-{#if helperText}
+{#if helper_text}
 <p id="{id}-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
-  {helperText}
+  {helper_text}
 </p>
 {/if}
 <script>
 import {MDCTextField} from "@material/textfield";
 
 import {processAttributes, formatString} from "./helpers.js";
-const mdcAttrs = ["value", "min", "max", "step", "maxLength", "pattern", "required"];
+const mdcAttrs = ["value", "min", "max", "step", "max_length", "pattern", "required"];
 export default {
     components: {
         Icon: "./Icon.html"
@@ -43,7 +43,7 @@ export default {
                 this.mdcComponent[key] = current[key];
             }
         }
-        for (let key of ["iconMode", "helperText", "outlined", "hintText"]) {
+        for (let key of ["icon_mode", "helper_text", "outlined", "hint_text"]) {
             if (changed[key]) {
                 this.mdcComponent.destroy();
                 this.mdcComponent = new MDCTextField(this.refs.textField);
@@ -55,9 +55,9 @@ export default {
         this.mdcComponent.destroy();
     },
     computed: {
-        inputAttrs({helperText, id}) {
+        inputAttrs({helper_text, id}) {
             var result = {};
-            if (helperText) {
+            if (helper_text) {
                 let elem = id+"-helper-text";
                 result["aria-controls"] = elem;
                 result["aria-describedby"] = elem;
@@ -74,10 +74,10 @@ export default {
                 }
                 delete result[key];
             }
-            if (result.icon && result.iconMode) {
-                classes.push(cls+"--with-"+result.iconMode+"-icon");
+            if (result.icon && result.icon_mode) {
+                classes.push(cls+"--with-"+result.icon_mode+"-icon");
             }
-            for (let key of ["attrs", "id", "name", "type", "helperText", "inputAttrs", "icon", "iconMode", ...mdcAttrs]) {
+            for (let key of ["attrs", "id", "name", "type", "helper_text", "inputAttrs", "icon", "icon_mode", ...mdcAttrs]) {
                 delete result[key];
             }
             if (result["class"]) {

@@ -1,11 +1,5 @@
-const uppercase = /[A-Z]/g;
-
-function formatChar(char) {
-    return "-"+char.toLowerCase();
-}
-
 export function formatString(str) {
-    return str.replace(uppercase, formatChar);
+    return str.replace("_", "-");
 }
 
 export function processAttributes(attrs) {

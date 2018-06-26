@@ -33,18 +33,11 @@ export default {
         this.mdcComponent.destroy();
     },
 	onupdate({ changed, current }) {
-	    if (changed.checked) {
-	        this.mdcComponent.checked = current.checked;
-	    }
-	    if (changed.indeterminate) {
-	        this.mdcComponent.indeterminate = current.indeterminate;
-	    }
-	    if (changed.disabled) {
-	        this.mdcComponent.disabled = current.disabled;
-	    }
-	    if (changed.value) {
-	        this.mdcComponent.value = current.value;
-	    }
+        for (let key of ["checked", "indeterminate", "disabled", "value"]) {
+    	    if (changed[key]) {
+    	        this.mdcComponent[key] = current[key];
+    	    }
+        }
 	},
 	methods: {
 	    getMDCField() {

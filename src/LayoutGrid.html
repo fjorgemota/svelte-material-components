@@ -26,7 +26,7 @@ export default {
         }
     },
     onstate({current}) {
-        if (current.align && ['top', 'middle', 'botton'].includes(current.align)) {
+        if (current.align && ['top', 'middle', 'bottom'].includes(current.align)) {
             throw new Error(`Invalid value for "align" attribute: "${current.align}", should be "top", "middle" or "bottom"`);
         }
     }

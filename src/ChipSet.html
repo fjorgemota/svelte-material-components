@@ -8,6 +8,12 @@ export default {
     data() {
         return {}
     },
+    oncreate() {
+        this.mdcComponent = new MDCChipSet(this.refs.chipset);
+    },
+	ondestroy() {
+	    this.mdcComponent.destroy();
+	},
     computed: {
         attrs(computed) {
             let result = Object.assign({}, computed);
@@ -26,12 +32,6 @@ export default {
             result["class"] = classes.join(" ");
             return processAttributes(result);
         }
-    },
-    oncreate() {
-        this.mdcComponent = new MDCChipSet(this.refs.chipset);
-    },
-	ondestroy() {
-	    this.mdcComponent.destroy();
-	}
+    }
 }
 </script>

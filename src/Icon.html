@@ -4,7 +4,7 @@ import {processAttributes} from './helpers.js';
 export default {
     computed: {
         attrs (attributes) {
-            let result = Object.assign({"ariaHidden": "true"}, attributes);
+            let result = Object.assign({"aria_hidden": "true"}, attributes);
             let classes = ["material-icons"];
             delete result.attrs;
             if (result["class"]) {

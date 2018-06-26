@@ -16,7 +16,7 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-toolbar";
             let classes = [cls];
-            for (let key of ["fixed", "waterfall", "fixedLastrowOnly", "flexible", "flexibleDefaultBehavior"]) {
+            for (let key of ["fixed", "waterfall", "fixed_lastrow_only", "flexible", "flexible_default_behavior"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }

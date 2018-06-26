@@ -1,13 +1,13 @@
 <nav ref:tabs>
   <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back">
-    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scrollBackLabel}">
-      {scrollBackIcon}
+    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scroll_back_label}">
+      {scroll_back_icon}
     </a>
   </div>
   <Tabs on:change {...attrs}><slot></slot></Tabs>
   <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward">
-    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scrollForwardLabel}">
-        {scrollForwardIcon}
+    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scroll_forward_label}">
+        {scroll_forward_icon}
     </a>
   </div>
 </nav>
@@ -19,10 +19,10 @@ export default {
     },
     data() {
         return {
-            "scrollBackLabel": "scroll back button",
-            "scrollBackIcon": "navigate_before",
-            "scrollForwardLabel": "scroll forward button",
-            "scrollForwardIcon": "navigate_next"
+            "scroll_back_label": "scroll back button",
+            "scroll_back_icon": "navigate_before",
+            "scroll_forward_label": "scroll forward button",
+            "scroll_forward_icon": "navigate_next"
         }
     },
     oncreate() {
@@ -39,7 +39,7 @@ export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
-            for (let key of ["attrs", "scrollBackIcon", "scrollBackLabel", "scrollForwardIcon", "scrollBackLabel"]) {
+            for (let key of ["attrs", "scroll_back_icon", "scroll_back_label", "scroll_forward_icon", "scroll_forward_label"]) {
                 delete result[key];
             }
             let classes = ["mdc-tab-bar-scroller__scroll-frame__tabs"];

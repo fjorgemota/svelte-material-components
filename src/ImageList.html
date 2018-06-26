@@ -8,7 +8,7 @@ export default {
             let result = Object.assign({}, attributes);
             let cls = "mdc-image-list";
             let classes = [cls];
-            for (let key of ["masonry", "withTextProtection"]) {
+            for (let key of ["masonry", "with_text_protection"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }

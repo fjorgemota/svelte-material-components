@@ -1,7 +1,7 @@
-<a ref:tab class="mdc-tab {(icon && !iconOnly) ?'mdc-tab--with-icon-and-text': ''}" href="#{href}">
+<a ref:tab class="mdc-tab {(icon && !icon_only) ?'mdc-tab--with-icon-and-text': ''}" href="#{href}">
     {#if icon}
         <Icon class="mdc-tab__icon">{icon}</Icon>
-        {#if !iconOnly}
+        {#if !icon_only}
             <span class="mdc-tab__icon-text"><slot></slot></span>
         {/if}
     {else}
@@ -17,7 +17,7 @@
      data() {
          return {
              icon: null,
-             iconOnly: false
+             icon_only: false
          }
      }
  }

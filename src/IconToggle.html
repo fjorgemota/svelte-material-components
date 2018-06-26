@@ -1,10 +1,10 @@
-<Icon ref:icon class="mdc-icon-toggle" role="button" ariaPressed="false" tabindex="0" dataToggleOn='{jsonencode(toggleOn)}' dataToggleOff='{jsonencode(toggleOff)}'><slot></slot></Icon>
+<Icon ref:icon class="mdc-icon-toggle" role="button" aria_pressed="false" tabindex="0" data_toggle_on='{jsonencode(toggle_on)}' data_toggle_off='{jsonencode(toggle_off)}'><slot></slot></Icon>
 <script>
 import {MDCIconToggle} from '@material/icon-toggle';
 
 export default {
 	data() {
-		return {'toggleOn': {}, 'toggleOff': {}};
+		return {'toggle_on': {}, 'toggle_off': {}};
 	},
     components: {
         Icon: './Icon.html'

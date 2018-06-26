@@ -1,22 +1,22 @@
 <li {...attrs}>
-    {#if showGraphic}
+    {#if show_graphic}
     <span role="presentation" class="mdc-list-item__graphic">
         <slot name="graphic"></slot>
     </span>
     {/if}
-    {#if primaryText}
+    {#if primary_text}
     <span class="mdc-list-item__text">
-      {primaryText}
-      {#if secondText}
+      {primary_text}
+      {#if second_text}
       <span class="mdc-list-item__secondary-text">
-        {secondText}
+        {second_text}
       </span>
       {/if}
     </span>
     {:else}
     <slot></slot>
     {/if}
-    {#if showMeta}
+    {#if show_meta}
     <span role="presentation" class="mdc-list-item__meta">
         <slot name="meta"></slot>
     </span>
@@ -24,12 +24,12 @@
 </li>
 
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processAttributes} from './helpers.js';
 export default {
     data() {
         return {
-            showMeta: false,
-            showGraphic: false
+            show_meta: false,
+            show_graphic: false
         }
     },
     computed: {
@@ -39,11 +39,11 @@ export default {
             let classes = [cls];
             for (let key of ["selected", "activated"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
-            for (let key of ["primaryText", "secondText", "showGraphic", "showMeta", "attrs"])  {
+            for (let key of ["primary_text", "second_text", "show_graphic", "show_meta", "attrs"])  {
                 delete result[key];
             }
             if (result["class"]) {

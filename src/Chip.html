@@ -1,5 +1,5 @@
 <div ref:chip {...attrs}>
-    {#if icon && iconLeading}
+    {#if icon && iconMode === "leading"}
       <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">{icon}</i>
     {/if}
     {#if checkmark}
@@ -11,7 +11,7 @@
     </div>
     {/if}
     <slot></slot>
-    {#if icon && !iconLeading}
+    {#if icon && iconMode === "trailing"}
       <i class="material-icons mdc-chip__icon  mdc-chip__icon--trailing" tabindex="0" role="button">{icon}</i>
     {/if}
 </div>
@@ -21,10 +21,15 @@ import {MDCChip} from '@material/chips';
 export default {
     data() {
         return {
-            "iconLeading": true,
             "checkmark": false
         }
     },
+    oncreate() {
+        this.mdcComponent = new MDCChip(this.refs.chip);
+    },
+	ondestroy() {
+	    this.mdcComponent.destroy();
+	},
     computed: {
         attrs(computed) {
             let result = Object.assign({}, computed);
@@ -41,17 +46,11 @@ export default {
             }
             result["class"] = classes.join(" ");
             delete result.icon;
-            delete result.iconLeading;
+            delete result.iconMode;
             delete result.checkmark;
             delete result.attrs;
             return processAttributes(result);
         }
-    },
-    oncreate() {
-        this.mdcComponent = new MDCChip(this.refs.chip);
-    },
-	ondestroy() {
-	    this.mdcComponent.destroy();
-	}
+    }
 }
 </script>
