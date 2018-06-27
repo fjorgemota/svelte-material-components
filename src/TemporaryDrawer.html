@@ -22,7 +22,7 @@ export default {
         });
         this.mdcComponent.listen("MDCTemporaryDrawer:close", () => {
             this.fire("close");
-            this.set({"open": true});
+            this.set({"open": false});
         });
     },
     ondestroy() {
