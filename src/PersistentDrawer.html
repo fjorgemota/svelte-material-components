@@ -1,13 +1,6 @@
 <aside ref:drawer {...attrs}>
   <nav class="mdc-drawer__drawer">
-    <header class="mdc-drawer__header">
-      <div class="mdc-drawer__header-content">
-        <slot name="header"></slot>
-      </div>
-    </header>
-    <div class="mdc-drawer__content">
-        <slot name="content"></slot>
-    </div>
+    <slot>
   </nav>
 </aside>
 <script>
