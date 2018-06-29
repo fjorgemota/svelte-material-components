@@ -10,6 +10,7 @@
   "license": "MIT",
   "main": "src/index.node.js",
   "module": "src/index.module.js",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/fjorgemota/svelte-material-components"
