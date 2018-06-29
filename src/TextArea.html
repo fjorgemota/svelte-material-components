@@ -64,7 +64,7 @@ export default {
             return result;
         },
         attrs (attributes) {
-            let result = {...attributes};
+            let result = Object.assign({}, attributes);
             let cls = "mdc-text-field";
             result.textarea = true;
             for (let key of ["box", "textarea", "dense", "fullwidth", "outlined", "disabled", "focused", ...iconsKeys]) {
