@@ -1,7 +1,7 @@
 <div ref:slider {...attrs}>
   <div class="mdc-slider__track-container">
     <div class="mdc-slider__track"></div>
-    {#if display_markers}
+    {#if displayMarkers}
     <div class="mdc-slider__track-marker-container"></div>
     {/if}
   </div>
@@ -18,7 +18,7 @@
   </div>
 </div>
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processClasses} from './helpers.js';
 import {MDCSlider} from '@material/slider';
 export default {
     oncreate() {
@@ -53,18 +53,15 @@ export default {
                 result.ariaLabel = result.label;
             }
             delete result.label;
-            for (let key of ["discrete", "display_markers"]) {
+            for (let key of ["discrete", "displayMarkers"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

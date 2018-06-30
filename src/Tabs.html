@@ -4,7 +4,7 @@
 </nav>
 <script>
 import {MDCTabBar} from '@material/tabs';
-import {formatString, processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     oncreate() {
         if (this.root && this.root.getTabsComponent) {
@@ -13,8 +13,8 @@ export default {
             this.mdcComponent = new MDCTabBar(this.refs.tabs);
         }
         this.mdcComponent.listen("MDCTabBar:change", () => {
-            this.fire("change", {"active_tab_index": this.mdcComponent.active_tab_index});
-            this.set({"active_tab_index": this.mdcComponent.active_tab_index});
+            this.fire("change", {"activeTabIndex": this.mdcComponent.activeTabIndex});
+            this.set({"active-tab-index": this.mdcComponent.activeTabIndex});
         })
     },
     ondestroy() {
@@ -23,8 +23,8 @@ export default {
         }
     },
     onstate({current, changed}) {
-        if (changed.active_tab_index && this.mdcComponent.active_tab_index !== current.active_tab_index) {
-            this.mdcComponent.active_tab_index = current.active_tab_index;
+        if (changed["active-tab-index"] && this.mdcComponent.activeTabIndex !== current["active-tab-index"]) {
+            this.mdcComponent.activeTabIndex = current["active-tab-index"];
         }
     },
     computed: {
@@ -32,19 +32,16 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-tab-bar";
             let classes = [cls];
-            for (let key of ["icon_tab_bar", "icons_with_text"]) {
+            for (let key of ["icon-tab-bar", "icons-with-text"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+formatString(key));
                 }
                 delete result[key];
             }
             delete result.attrs;
-            delete result.active_tab_index;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            delete result["active-tab-index"];
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 }

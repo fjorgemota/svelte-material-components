@@ -1,7 +1,7 @@
 <header ref:toolbar {...attrs}><slot></slot></header>
 
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processClasses} from './helpers.js';
 import {MDCToolbar} from '@material/toolbar';
 
 export default {
@@ -16,18 +16,15 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-toolbar";
             let classes = [cls];
-            for (let key of ["fixed", "waterfall", "fixed_lastrow_only", "flexible", "flexible_default_behavior"]) {
+            for (let key of ["fixed", "waterfall", "fixed-lastrow-only", "flexible", "flexible-default-behavior"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

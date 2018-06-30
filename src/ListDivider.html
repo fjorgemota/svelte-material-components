@@ -4,7 +4,7 @@
 <hr {...attrs} />
 {/if}
 <script>
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     data() {
         return {
@@ -15,16 +15,13 @@ export default {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let classes = ["mdc-list-divider"];
-            if (result.in_list) {
+            if (result["in-list"]) {
                 result.role = "separator";
             }
-            delete result.in_list;
+            delete result["in-list"];
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

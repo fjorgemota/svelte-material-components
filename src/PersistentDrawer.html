@@ -5,7 +5,7 @@
 </aside>
 <script>
 import {MDCPersistentDrawer} from '@material/drawer';
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     oncreate() {
         this.mdcComponent = new MDCPersistentDrawer(this.refs.drawer);
@@ -29,13 +29,10 @@ export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
-            let classes = ["mdc-drawer mdc-drawer--persistent"];
+            let classes = ["mdc-drawer", "mdc-drawer--persistent"];
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 }

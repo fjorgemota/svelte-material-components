@@ -16,7 +16,7 @@
     {/if}
 </div>
 <script>
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 import {MDCChip} from '@material/chips';
 export default {
     data() {
@@ -41,15 +41,11 @@ export default {
                 }
                 delete result[key];
             }
-            if (result["class"]) {
-                classes.push(result["class"]);
+            for (let key of ["icon", "iconMode", "checkmark", "attrs"]) {
+                delete result[key];
             }
-            result["class"] = classes.join(" ");
-            delete result.icon;
-            delete result.iconMode;
-            delete result.checkmark;
-            delete result.attrs;
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 }

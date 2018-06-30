@@ -3,6 +3,7 @@
 </ListItem>
 
 <script>
+import {processClasses} from './helpers.js';
 export default {
     components: {
         ListItem: './ListItem.html'
@@ -18,16 +19,13 @@ export default {
             let result = Object.assign({"role": "menuitem"}, attributes);
             if (result.disabled) {
                 result.tabindex = "-1";
-                result.ariaDisabled = "true";
+                result["aria-disabled"] = "true";
             }
-            for (let key of ["selected", "disabled", "activated", "primary_text", "second_text", "show_graphic", "show_meta", "attrs"])  {
+            for (let key of ["selected", "disabled", "activated", "primaryText", "secondText", "showGraphic", "showMeta", "attrs"])  {
                 delete result[key];
             }
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

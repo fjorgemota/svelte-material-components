@@ -5,7 +5,7 @@
 </button>
 <script>
 import {MDCRipple} from '@material/ripple';
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     components: {
         Icon: './Icon.html'
@@ -40,11 +40,8 @@ export default {
             }
             delete result.ripple;
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

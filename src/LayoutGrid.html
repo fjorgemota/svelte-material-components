@@ -3,7 +3,7 @@
 </div>
 
 <script>
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     components: {
         LayoutGridInner: './LayoutGridInner.html'
@@ -18,11 +18,8 @@ export default {
             }
             delete result.align;
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     },
     onstate({current}) {

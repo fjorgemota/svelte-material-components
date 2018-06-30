@@ -1,10 +1,10 @@
-<Icon ref:icon class="mdc-icon-toggle" role="button" aria_pressed="false" tabindex="0" data_toggle_on='{jsonencode(toggle_on)}' data_toggle_off='{jsonencode(toggle_off)}'><slot></slot></Icon>
+<Icon ref:icon class="mdc-icon-toggle" role="button" aria-pressed="false" tabindex="0" data-toggle-on='{jsonencode(json["toggle-on"])}' data-toggle-off='{jsonencode(json["toggle-off"])}'><slot></slot></Icon>
 <script>
 import {MDCIconToggle} from '@material/icon-toggle';
 
 export default {
 	data() {
-		return {'toggle_on': {}, 'toggle_off': {}};
+		return {'toggle-on': {}, 'toggle-off': {}};
 	},
     components: {
         Icon: './Icon.html'
@@ -21,10 +21,16 @@ export default {
     onupdate() {
         this.mdcComponent.refreshToggleData();
     },
-    helpers: {
-        jsonencode(data) {
-            return JSON.stringify(data);
-        }
-    }
+	computed: {
+		json(state) {
+			var result = {};
+			for (let key of ["toggle-on", "toggle-off"]) {
+				if (state[key]) {
+					result[key] = JSON.stringify(state[key]);
+				}
+			}
+			return result;
+		}
+	}
 };
 </script>

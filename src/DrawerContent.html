@@ -2,7 +2,7 @@
     <slot></slot>
 </div>
 <script>
-import {processAttributes, processClasses} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     computed: {
         attrs (attributes) {
@@ -10,7 +10,7 @@ export default {
             let classes = ["mdc-drawer__content"];
             delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
-            return processAttributes(result);
+            return result;
         }
     }
 };

@@ -3,7 +3,7 @@
 </header>
 
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processClasses} from './helpers.js';
 import {MDCTopAppBar} from '@material/top-app-bar';
 
 export default {
@@ -21,18 +21,15 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-top-app-bar";
             let classes = [cls];
-            for (let key of ["short", "short_collapsed", "fixed", "prominent", "dense"]) {
+            for (let key of ["short", "short-collapsed", "fixed", "prominent", "dense"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"])
+            return result;
         }
     }
 };

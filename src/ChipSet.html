@@ -3,7 +3,7 @@
 </div>
 <script>
 import {MDCChipSet} from '@material/chips';
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     data() {
         return {}
@@ -26,11 +26,8 @@ export default {
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 }

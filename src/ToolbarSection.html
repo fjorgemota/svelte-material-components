@@ -3,14 +3,14 @@
 </section>
 
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls ="mdc-toolbar__section";
             let classes = [cls];
-            for (let key of ["align", "shrink_to_fit"]) {
+            for (let key of ["align", "shrink-to-fit"]) {
                 if (result[key]) {
                     if (key === "align") {
                         let v = result[key]
@@ -20,16 +20,13 @@ export default {
                             continue;
                         }
                     }
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

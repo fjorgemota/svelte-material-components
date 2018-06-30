@@ -2,18 +2,15 @@
     <slot></slot>
 </nav>
 <script>
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
-            let classes = ["mdc-drawer mdc-drawer--permanent"];
+            let classes = ["mdc-drawer", "mdc-drawer--permanent"];
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 }

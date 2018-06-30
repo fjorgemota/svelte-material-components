@@ -7,7 +7,7 @@
 </div>
 <script>
 import {MDCSelect} from '@material/select';
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     oncreate() {
         this.mdcComponent = new MDCSelect(this.refs.select);
@@ -39,14 +39,11 @@ export default {
                 classes.push(cls+"--"+key);
             }
             delete result[key];
-            for (let key of ["attrs", "id", "name", "value", "selected_index", "disabled"]) {
+            for (let key of ["attrs", "id", "name", "value", "selectedIndex", "disabled"]) {
                 delete result[key];
             }
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     },
     methods: {

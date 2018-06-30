@@ -5,7 +5,7 @@
 </div>
 
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processClasses, formatString} from './helpers.js';
 import {MDCGridList} from '@material/grid-list'
 export default {
     oncreate() {
@@ -31,45 +31,42 @@ export default {
                 throw new Error("Padding has invalid value: detected '"+result.padding+"', should be 1 or 4");
             }
             delete result.padding;
-            switch (result.icon_align) {
+            switch (result["icon-align"]) {
               case "start":
               case "end":
-                classes.push(cls+"--with-icon-align-"+result.icon_align);
+                classes.push(cls+"--with-icon-align-"+result["icon-align"]);
                 break;
               default:
-                if (result.iconAlign) {
-                  throw new Error("iconAlign has invalid value: detected '"+result.iconAlign+"', should be 'start' or 'end'");
+                if (result["icon-align"]) {
+                  throw new Error("icon-align has invalid value: detected '"+result["icon-align"]+"', should be 'start' or 'end'");
                 }
             }
-            delete result.icon_align;
-            switch (result.tile_aspect) {
+            delete result["icon-align"];
+            switch (result["tile-aspect"]) {
               case "1x1":
               case "16x9":
               case "2x3":
               case "3x2":
               case "4x3":
               case "3x4":
-                classes.push(cls+"--tile-aspect-"+result.tile_aspect);
+                classes.push(cls+"--tile-aspect-"+result["tile-aspect"]);
                 break;
               default:
-                if (result.tileAspect) {
-                  throw new Error("tileAspect has invalid value: detected '"+result.tileAspect+"', should be '1x1', '16x9', '2x3', '3x2', '4x3' or '3x4'.");
+                if (result["tile-aspect"]) {
+                  throw new Error("tile-aspect has invalid value: detected '"+result["tile-aspect"]+"', should be '1x1', '16x9', '2x3', '3x2', '4x3' or '3x4'.");
                 }
             }
-            delete result.tile_aspect;
+            delete result["tile-aspect"];
 
-            for (let key of ["header_caption", "twoline_caption"]) {
+            for (let key of ["header-caption", "twoline-caption"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

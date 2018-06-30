@@ -1,28 +1,29 @@
 <nav ref:tabs>
   <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back">
-    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scroll_back_label}">
-      {scroll_back_icon}
+    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scrollBackLabel}">
+      {scrollBackIcon}
     </a>
   </div>
   <Tabs on:change {...attrs}><slot></slot></Tabs>
   <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward">
-    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scroll_forward_label}">
-        {scroll_forward_icon}
+    <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="{scrollForwardLabel}">
+        {scrollForwardIcon}
     </a>
   </div>
 </nav>
 <script>
 import {MDCTabBarScroller} from '@material/tabs';
+import {processClasses} from './helpers.js';
 export default {
     components: {
         Tabs: './Tabs.html'
     },
     data() {
         return {
-            "scroll_back_label": "scroll back button",
-            "scroll_back_icon": "navigate_before",
-            "scroll_forward_label": "scroll forward button",
-            "scroll_forward_icon": "navigate_next"
+            "scrollBackLabel": "scroll back button",
+            "scrollBackIcon": "navigate_before",
+            "scrollForwardLabel": "scroll forward button",
+            "scrollForwardIcon": "navigate_next"
         }
     },
     oncreate() {
@@ -39,14 +40,11 @@ export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
-            for (let key of ["attrs", "scroll_back_icon", "scroll_back_label", "scroll_forward_icon", "scroll_forward_label"]) {
+            for (let key of ["attrs", "scrollBackIcon", "scrollBackLabel", "scrollForwardIcon", "scrollForwardLabel"]) {
                 delete result[key];
             }
             let classes = ["mdc-tab-bar-scroller__scroll-frame__tabs"];
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
+            result["class"] = processClasses(classes, result["class"]);
             return result;
         }
     }

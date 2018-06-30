@@ -3,25 +3,22 @@
 </ul>
 
 <script>
-import {processAttributes, formatString} from './helpers.js';
+import {processClasses} from './helpers.js';
 export default {
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls ="mdc-list";
             let classes = [cls];
-            for (let key of ["twoLine", "dense", "non_interactive", "avatar_list"]) {
+            for (let key of ["two-line", "dense", "non-interactive", "avatar-list"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
             delete result.attrs;
-            if (result["class"]) {
-                classes.push(result["class"]);
-            }
-            result["class"] = classes.join(" ");
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     }
 };

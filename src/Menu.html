@@ -1,11 +1,10 @@
 <div ref:menu tabindex="-1" class="mdc-menu">
-  <List class="mdc-menu__items" role="menu" ariaHidden="true">
-    <spot></spot>
+  <List class="mdc-menu__items" role="menu" aria-hidden="true">
+    <slot></slot>
   </List>
 </div>
 
 <script>
-import {processAttributes} from './helpers.js';
 import {MDCMenu, Corner} from '@material/menu';
 export default {
     components: {

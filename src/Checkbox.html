@@ -15,7 +15,8 @@
 </div>
 <script>
 import {MDCCheckbox} from '@material/checkbox';
-import {processAttributes} from './helpers.js';
+import {processClasses} from './helpers.js';
+const props = ["checked", "indeterminate", "disabled", "value"];
 export default {
     data() {
         return {
@@ -33,7 +34,7 @@ export default {
         this.mdcComponent.destroy();
     },
 	onupdate({ changed, current }) {
-        for (let key of ["checked", "indeterminate", "disabled", "value"]) {
+        for (let key of props) {
     	    if (changed[key]) {
     	        this.mdcComponent[key] = current[key];
     	    }
@@ -52,13 +53,13 @@ export default {
             if (result["disabled"]) {
                 classes.push(cls+"--disabled");
             }
-            delete result.checked;
-            delete result.indeterminate;
-            delete result.disabled;
-            delete result.value;
+            for (let key of props) {
+                delete result[key];
+            }
             delete result.id;
             delete result.attrs;
-            return processAttributes(result);
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
         }
     },
 }

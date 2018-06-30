@@ -1,6 +1,9 @@
-<button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--{mode} {action?'mdc-dialog__action':''}"><slot></slot></button>
+<Button type="button" class="mdc-dialog__footer__button mdc-dialog__footer__button--{mode} {action?'mdc-dialog__action':''}"><slot></slot></Button>
 <script>
 export default {
+    components: {
+        Button: "./Button.html"
+    },
     onstate({current, changed, previous}) {
         if (changed.mode && previous) {
             throw new Error("Mode cannot be changed");
