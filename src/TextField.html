@@ -28,7 +28,7 @@
 <script>
 import {MDCTextField} from "@material/textfield";
 
-import {processClasses, formatString} from "./helpers.js";
+import {processClasses} from "./helpers.js";
 const mdcAttrs = ["value", "min", "max", "step", "max_length", "pattern", "required"];
 export default {
     components: {
@@ -70,7 +70,7 @@ export default {
             let classes = [cls];
             for (let key of ["box", "dense", "fullwidth", "outlined", "disabled", "focused"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
