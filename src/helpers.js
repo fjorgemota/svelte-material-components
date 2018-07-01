@@ -1,6 +1,9 @@
 const regex = /%s/gi;
 
 export function processClasses(classes, userClasses) {
+    if (!userClasses) {
+        return classes.join(" ");
+    }
     if (Array.isArray(userClasses)) {
         userClasses = userClasses.join(" ");
     }
