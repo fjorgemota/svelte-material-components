@@ -1,4 +1,4 @@
-<header {...attrs}><slot></slot></header>
+<header ref:toolbar {...attrs}><slot></slot></header>
 
 <script>
 import {processClasses} from './helpers.js';
@@ -6,7 +6,7 @@ import {MDCTopAppBar} from '@material/top-app-bar';
 
 export default {
     oncreate() {
-        this.mdcComponent = new MDCToolbar(this.refs.toolbar);
+        this.mdcComponent = new MDCTopAppBar(this.refs.toolbar);
         this.mdcComponent.listen("MDCTopAppBar:nav", () => {
             this.emit("nav");
         })
