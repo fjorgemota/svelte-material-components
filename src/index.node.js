@@ -54,4 +54,5 @@ module.exports.TopAppBar = require('./TopAppBar.html');
 module.exports.TopAppBarIcon = require('./TopAppBarIcon.html');
 module.exports.TopAppBarRow = require('./TopAppBarRow.html');
 module.exports.TopAppBarSection = require('./TopAppBarSection.html');
+module.exports.TopAppBarTitle = require('./TopAppBarTitle.html');
 module.exports.Typography = require('./Typography.html');

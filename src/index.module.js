@@ -54,4 +54,5 @@ export {default as TopAppBar} from './TopAppBar.html';
 export {default as TopAppBarIcon} from './TopAppBarIcon.html';
 export {default as TopAppBarRow} from './TopAppBarRow.html';
 export {default as TopAppBarSection} from './TopAppBarSection.html';
+export {default as TopAppBarTitle} from './TopAppBarTitle.html';
 export {default as Typography} from './Typography.html';
