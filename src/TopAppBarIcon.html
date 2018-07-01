@@ -12,7 +12,7 @@ export default {
             var classes = [];
             for (let key of ["navigation-icon", "action-item"]) {
                 if (result[key] && classes.length === 0) {
-                    classes.push(cls+"--"+key);
+                    classes.push(cls+key);
                 }
                 delete result[key];
             }
