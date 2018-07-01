@@ -11,10 +11,10 @@ export default {
             let cls = "mdc-top-app-bar__";
             var classes = [];
             for (let key of ["navigation-icon", "action-item"]) {
-                delete result[key];
                 if (result[key] && classes.length === 0) {
                     classes.push(cls+"--"+key);
                 }
+                delete result[key];
             }
             delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
