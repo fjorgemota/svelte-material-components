@@ -34,7 +34,7 @@ export default {
             let classes = [cls];
             for (let key of ["icon-tab-bar", "icons-with-text"]) {
                 if (result[key]) {
-                    classes.push(cls+"--"+formatString(key));
+                    classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
