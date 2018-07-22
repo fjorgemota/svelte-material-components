@@ -1,16 +1,20 @@
 const fs = require("fs");
 var contentNode = [];
 var contentModule = [];
-var getComponentName = (name) => name.substr(0, name.length-5);
-var isComponent = (name) => name.substr(name.length-5) === ".html";
+var directory = "src/";
+if (process.argv.length > 2 && process.argv.pop() === "dist") {
+    directory = "dist/";
+}
+var getComponentName = (name) => name.split(".")[0];
+var isComponent = (name) => name[0] === name[0].toUpperCase() && name.split(".").length === 2;
 var getComponentAndFileName = (name) => {return {filename: name, componentName: getComponentName(name)}};
 
-fs.readdirSync("src/")
+fs.readdirSync(directory)
     .filter(isComponent)
     .map(getComponentAndFileName)
     .forEach(({filename, componentName}) => {
         contentNode.push(`module.exports.${componentName} = require('./${filename}');`);
         contentModule.push(`export {default as ${componentName}} from './${filename}';`);
     });
-fs.writeFileSync("src/index.node.js", contentNode.join("\n"));
-fs.writeFileSync("src/index.module.js", contentModule.join("\n"));
+fs.writeFileSync(directory+"index.node.js", contentNode.join("\n"));
+fs.writeFileSync(directory+"index.module.js", contentModule.join("\n"));
