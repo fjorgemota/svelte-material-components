@@ -1,15 +1,16 @@
 {
   "name": "svelte-material-components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Svelte wrapper for \"Material Components for the web\"",
   "svelte.root": "src/",
   "scripts": {
+    "build": "rollup -c rollup.config.js && node update-main.js dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fernando Jorge Mota <contato@fjorgemota.com>",
   "license": "MIT",
-  "main": "src/index.node.js",
-  "module": "src/index.module.js",
+  "main": "dist/index.node.js",
+  "module": "dist/index.module.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
