@@ -16,5 +16,5 @@ fs.readdirSync(directory)
         contentNode.push(`module.exports.${componentName} = require('./${filename}');`);
         contentModule.push(`export {default as ${componentName}} from './${filename}';`);
     });
-fs.writeFileSync(directory+"index.node.js", contentNode.join("\n"));
-fs.writeFileSync(directory+"index.module.js", contentModule.join("\n"));
+fs.writeFileSync(directory+"index.js", contentNode.join("\n"));
+fs.writeFileSync(directory+"index.mjs", contentModule.join("\n"));

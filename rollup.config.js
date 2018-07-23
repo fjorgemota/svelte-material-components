@@ -9,22 +9,22 @@ let pathES = {};
 let pathUMD = {};
 let svelteShared = "svelte/shared.js";
 let svelteSharedComputed = require.resolve(svelteShared);
-pathES[svelteSharedComputed] = "./shared.js";
-pathUMD[svelteSharedComputed] = "./shared.umd.js";
+pathES[svelteSharedComputed] = "./shared.mjs";
+pathUMD[svelteSharedComputed] = "./shared.js";
 var globals = {};
 globals[svelteSharedComputed] = "svelteShared";
 config.push({
     input: svelteSharedComputed,
     output: [
-        { file: 'dist/shared.js', 'format': 'es'}, 
-        { file: 'dist/shared.umd.js', 'format': 'umd', 'name': "svelteShared"}
+        { file: 'dist/shared.mjs', 'format': 'es'},
+        { file: 'dist/shared.js', 'format': 'umd', 'name': "svelteShared"}
     ]
 })
 for(let name of names) {
     config.push({
 		input: 'src/'+name+'.html',
 		output: [
-			{ file: 'dist/'+name+'.js', 'format': 'es', paths: pathES }
+			{ file: 'dist/'+name+'.mjs', 'format': 'es', paths: pathES }
 		],
         external: [
             svelteSharedComputed,
@@ -38,7 +38,7 @@ for(let name of names) {
     config.push({
 		input: 'src/'+name+'.html',
 		output: [
-            { file: 'dist/'+name+'.umd.js', 'format': 'umd', name: name, paths: pathUMD, globals: globals }
+            { file: 'dist/'+name+'.js', 'format': 'umd', name: name, paths: pathUMD, globals: globals }
 		],
         external: [
             svelteSharedComputed,
