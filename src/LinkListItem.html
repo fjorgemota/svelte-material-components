@@ -1,22 +1,22 @@
 <a {...attrs}>
-    {#if show_graphic}
+    {#if showGraphic}
     <span role="presentation" class="mdc-list-item__graphic">
         <slot name="graphic"></slot>
     </span>
     {/if}
-    {#if primary_text}
+    {#if primaryText}
     <span class="mdc-list-item__text">
-      {primary_text}
-      {#if second_text}
+      {primaryText}
+      {#if secondText}
       <span class="mdc-list-item__secondary-text">
-        {second_text}
+        {secondText}
       </span>
       {/if}
     </span>
     {:else}
     <slot></slot>
     {/if}
-    {#if show_meta}
+    {#if showMeta}
     <span role="presentation" class="mdc-list-item__meta">
         <slot name="meta"></slot>
     </span>
@@ -28,8 +28,8 @@ import {processClasses} from './helpers.js';
 export default {
     data() {
         return {
-            show_meta: false,
-            show_graphic: false
+            showMeta: false,
+            showGraphic: false
         }
     },
     computed: {
@@ -43,7 +43,7 @@ export default {
                 }
                 delete result[key];
             }
-            for (let key of ["primary_text", "second_text", "show_graphic", "show_meta", "attrs"])  {
+            for (let key of ["primaryText", "secondText", "showGraphic", "showMeta", "attrs"])  {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

@@ -3,8 +3,8 @@
     <Icon class="mdc-text-field__icon" tabindex="0" role="button">{icon}</Icon>
   {/if}
   <textarea id="{id}" name="{name}" class="mdc-text-field__input" disabled={disabled} rows="{rows}" cols="{cols}" {...inputAttrs}>{value}</textarea>
-  {#if hint_text}
-    <label class="mdc-floating-label" for="{id}">{hint_text}</label>
+  {#if hintText}
+    <label class="mdc-floating-label" for="{id}">{hintText}</label>
   {/if}
   {#if icon && iconMode=="trailing"}
     <Icon class="mdc-text-field__icon" tabindex="0" role="button">{icon}</Icon>
@@ -41,7 +41,7 @@ export default {
                 this.mdcComponent[key] = current[key];
             }
         }
-        for (let key of ["helperText", "outlined", "hint_text", "iconMode"]) {
+        for (let key of ["helperText", "outlined", "hintText", "iconMode"]) {
             if (changed[key]) {
                 this.mdcComponent.destroy();
                 this.mdcComponent = new MDCTextField(this.refs.textArea);
