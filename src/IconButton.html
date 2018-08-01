@@ -1,0 +1,30 @@
+<button {...attrs}><slot></slot></button>
+<script>
+import {MDCIconButtonToggle} from '@material/icon-button';
+
+export default {
+	data() {
+		return {'toggle-on': {}, 'toggle-off': {}};
+	},
+    oncreate() {
+        this.mdcComponent = new MDCIconButtonToggle(this.refs.icon.getElement());
+        this.mdcComponent.listen("MDCIconButtonToggle:change", () => {
+			this.fire("change");
+		});
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    onupdate() {
+        this.mdcComponent.refreshToggleData();
+    },
+	computed: {
+		attrs(attributes) {
+            let result = Object.assign({}, attributes);
+            let classes = ["mdc-icon-button", "material-icons"];
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
+		}
+	}
+};
+</script>
