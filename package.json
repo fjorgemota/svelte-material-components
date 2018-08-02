@@ -1,6 +1,6 @@
 {
   "name": "svelte-material-components",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Svelte wrapper for \"Material Components for the web\"",
   "svelte.root": "src/",
   "scripts": {
