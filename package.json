@@ -5,7 +5,7 @@
   "svelte.root": "src/",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "rollup -c rollup.config.js && node update-main.js dist",
+    "build": "rm -Rf dist && rollup -c rollup.config.js && node update-main.js dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fernando Jorge Mota <contato@fjorgemota.com>",
