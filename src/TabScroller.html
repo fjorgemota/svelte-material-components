@@ -25,7 +25,7 @@ export default {
             let classes = [cls];
             if (["start", "end", "center"].includes(result["align"])) {
                 classes.push(cls+"--align-"+result.align);
-                delete result.align";
+                delete result.align;
             }
             delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
