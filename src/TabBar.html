@@ -1,0 +1,41 @@
+<div ref:tabs {...attrs}>
+  <slot></slot>
+</div>
+<script>
+import {MDCTabBar} from '@material/tab-bar';
+import {processClasses} from './helpers.js';
+export default {
+    oncreate() {
+        if (this.root && this.root.getTabsComponent) {
+            this.mdcComponent = this.root.getTabsComponent();
+        } else {
+            this.mdcComponent = new MDCTabBar(this.refs.tabs);
+        }
+        this.mdcComponent.listen("MDCTabBar:activated", (data) => {
+            this.fire("change", {"activeTabIndex": data.detail.index});
+            if (data.detail.index !== this.get().activeTabIndex) {
+                this.set({"activeTabIndex": data.detail.index});
+            }
+        })
+    },
+    ondestroy() {
+        if (!!this.mdcComponent) {
+            this.mdcComponent.destroy();
+        }
+    },
+    onstate({current, changed}) {
+        if (changed["activeTabIndex"] && current["activeTabIndex"]) {
+            this.mdcComponent.activateTab(current["activeTabIndex"]);
+        }
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({role:"tablist"}, attributes);
+            let classes = ["mdc-tab-bar"];
+            delete result.attrs;
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
+        }
+    }
+}
+</script>
