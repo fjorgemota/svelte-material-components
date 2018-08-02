@@ -1,12 +1,12 @@
 {#if href }
-<a href={href} on:click on:mouseup on:mousedown {...attrs}>
+<a ref:button href={href} on:click on:mouseup on:mousedown {...attrs}>
     {#if icon }
         <Icon class="mdc-button__icon">{ icon }</Icon>
     {/if}
     <slot></slot>
 </a>
 { :else }
-<button on:click on:mouseup on:mousedown {...attrs}>
+<button ref:button on:click on:mouseup on:mousedown {...attrs}>
     {#if icon }
         <Icon class="mdc-button__icon">{ icon }</Icon>
     {/if}
@@ -15,21 +15,42 @@
 {/if}
 <script>
 import {processClasses} from './helpers.js';
+import {MDCRipple} from '@material/ripple';
+
 export default {
     components: {
         Icon: "./Icon.html"
     },
+    oncreate() {
+        this.mdcComponent = null;
+    },
+    ondestroy() {
+        if (this.mdcComponent !== null) {
+            this.mdcComponent.destroy();
+        }
+    }
+    onupdate({changed, current}) {
+        if (changed.ripple) {
+            if(current.ripple && this.mdcComponent === null) {
+                this.mdcComponent = new MDCRipple(this.refs.button);
+            } else if (!current.ripple && this.mdcComponent !== null) {
+                this.mdcComponent.destroy();
+                this.mdcComponent = null;
+            }
+        }
+    }
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls ="mdc-button";
             let classes = [cls];
-            for (let key of ["ripple", "dense", "raised", "disabled", "unelevated",  "outlined"]) {
+            for (let key of ["dense", "raised", "unelevated",  "outlined"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+key);
                 }
                 delete result[key];
             }
+            delete result.ripple;
             delete result.icon;
             delete result.href;
             delete result.attrs;
