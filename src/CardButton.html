@@ -8,7 +8,7 @@ export default {
             var result = Object.assign({}, attributes);
             var cls ="mdc-card__action--button";
             var classes = ["mdc-card__action", cls];
-            for (let key of ["ripple", "dense", "raised", "disabled", "unelevated", "stroked"]) {
+            for (let key of ["dense", "raised", "unelevated", "stroked"]) {
                 if (result[key]) {
                     classes.push(cls+"--"+key);
                 }

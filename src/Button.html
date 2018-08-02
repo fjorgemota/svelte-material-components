@@ -28,7 +28,7 @@ export default {
         if (this.mdcComponent !== null) {
             this.mdcComponent.destroy();
         }
-    }
+    },
     onupdate({changed, current}) {
         if (changed.ripple) {
             if(current.ripple && this.mdcComponent === null) {
@@ -38,7 +38,7 @@ export default {
                 this.mdcComponent = null;
             }
         }
-    }
+    },
     computed: {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
