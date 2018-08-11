@@ -1,0 +1,49 @@
+<span ref:indicator {...attrs}>
+    <span class="{classContent}">{icon}</span>
+</span>
+<script>
+import {MDCTabIndicator} from '@material/tab-indicator';
+import {processClasses} from './helpers.js';
+export default {
+    data() {
+        return {
+            "icon": ""
+        }
+    },
+    oncreate() {
+        this.mdcComponent = new MDCTabIndicator(this.refs.indicator);
+    },
+    ondestroy() {
+        this.mdcComponent.destroy();
+    },
+    computed: {
+        attrs (attributes) {
+            let result = Object.assign({}, attributes);
+            let cls = "mdc-tab-indicator";
+            let classes = [cls];
+            for (let key of ["active", "fade"]) {
+                if (result[key]) {
+                    classes.push(cls+"--"+key);
+                }
+                delete result[key];
+            }
+            for (let key of ["attrs", "underline", "icon"]) {
+                delete result[key];
+            }
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
+        },
+        classContent ({icon, underline}) {
+            let cls = "mdc-tab-indicator__content";
+            let classes = [cls];
+            if (icon.length) {
+                classes.push(cls+"--icon");
+                classes.push("material-icons");
+            } else if (underline) {
+                classes.push(cls+"--underline");
+            }
+            return classes.join(" ");
+        }
+    }
+}
+</script>
