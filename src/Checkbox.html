@@ -53,11 +53,9 @@ export default {
             if (result["disabled"]) {
                 classes.push(cls+"--disabled");
             }
-            for (let key of props) {
+            for (let key of ["id", "attrs", ...props]) {
                 delete result[key];
             }
-            delete result.id;
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

@@ -50,10 +50,9 @@ export default {
                 }
                 delete result[key];
             }
-            delete result.ripple;
-            delete result.icon;
-            delete result.href;
-            delete result.attrs;
+            for (let key of ["attrs", "ripple", "icon", "href"])  {
+                delete result[key];
+            }
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }
