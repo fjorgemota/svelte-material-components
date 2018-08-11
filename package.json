@@ -18,11 +18,11 @@
     "url": "https://github.com/fjorgemota/svelte-material-components"
   },
   "devDependencies": {
-    "rollup": "^0.63.4",
-    "rollup-plugin-commonjs": "^9.1.4",
+    "rollup": "^0.64.1",
+    "rollup-plugin-commonjs": "^9.1.5",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-svelte": "^4.2.1",
-    "svelte": "^2.9.7"
+    "svelte": "^2.9.11"
   },
   "peerDependencies": {
     "material-components-web": "^0.38.0"
