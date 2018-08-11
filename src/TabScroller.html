@@ -1,4 +1,4 @@
-<div {...attrs}>
+<div ref:scroller {...attrs}>
   <div class="mdc-tab-scroller__scroll-area">
     <div class="mdc-tab-scroller__scroll-content"></div>
   </div>
@@ -8,15 +8,10 @@ import {MDCTabScroller} from '@material/tab-scroller';
 import {processClasses} from './helpers.js';
 export default {
     oncreate() {
-        this.mdcComponent = new MDCTabScroller(this.refs.tabs);
+        this.mdcComponent = new MDCTabScroller(this.refs.scroller);
     },
     ondestroy() {
         this.mdcComponent.destroy();
-    },
-    methods: {
-        getTabsComponent() {
-            return this.mdcComponent.tabs;
-        }
     },
     computed: {
         attrs (attributes) {

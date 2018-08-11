@@ -1,4 +1,4 @@
-<div ref:tabs {...attrs}>
+<div ref:bar {...attrs}>
   <slot></slot>
 </div>
 <script>
@@ -9,7 +9,7 @@ export default {
         if (this.root && this.root.getTabsComponent) {
             this.mdcComponent = this.root.getTabsComponent();
         } else {
-            this.mdcComponent = new MDCTabBar(this.refs.tabs);
+            this.mdcComponent = new MDCTabBar(this.refs.bar);
         }
         this.mdcComponent.listen("MDCTabBar:activated", (data) => {
             this.fire("change", {"activeTabIndex": data.detail.index});
