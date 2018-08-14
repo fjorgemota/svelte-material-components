@@ -1,4 +1,4 @@
-<Button {...attrs}></Button>
+<div {...attrs}><slot></slot></div>
 <script>
 import {processClasses} from './helpers.js';
 export default {
@@ -6,14 +6,7 @@ export default {
     computed: {
         attrs (attributes) {
             var result = Object.assign({}, attributes);
-            var cls ="mdc-card__action--button";
-            var classes = ["mdc-card__action", cls];
-            for (let key of ["dense", "raised", "unelevated", "stroked"]) {
-                if (result[key]) {
-                    classes.push(cls+"--"+key);
-                }
-                delete result[key];
-            }
+            var classes = ["mdc-card__action--buttons"];
             delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;

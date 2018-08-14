@@ -1,0 +1,16 @@
+<div {...attrs}><slot></slot></div>
+<script>
+import {processClasses} from './helpers.js';
+export default {
+    components: {Button: "./Button.html"},
+    computed: {
+        attrs (attributes) {
+            var result = Object.assign({}, attributes);
+            var classes = ["mdc-card__action--icons"];
+            delete result.attrs;
+            result["class"] = processClasses(classes, result["class"]);
+            return result;
+        }
+    }
+};
+</script>
