@@ -30,7 +30,6 @@ export default {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let classes = ["mdc-drawer mdc-drawer--temporary"];
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

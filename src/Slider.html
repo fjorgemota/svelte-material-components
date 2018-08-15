@@ -59,7 +59,6 @@ export default {
                 }
                 delete result[key];
             }
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

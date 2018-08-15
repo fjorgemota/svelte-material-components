@@ -53,7 +53,7 @@ export default {
             if (result["disabled"]) {
                 classes.push(cls+"--disabled");
             }
-            for (let key of ["id", "attrs", ...props]) {
+            for (let key of ["id", ...props]) {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

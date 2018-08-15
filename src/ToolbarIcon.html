@@ -10,7 +10,6 @@ export default {
             let result = Object.assign({}, attributes);
             let classes = ["mdc-toolbar__"+(!!result.menu ? "menu-" : "")+"icon"];
             delete result.menu;
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

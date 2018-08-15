@@ -77,7 +77,7 @@ export default {
             if (result.icon && result.iconMode) {
                 classes.push(cls+"--with-"+result.iconMode+"-icon");
             }
-            for (let key of ["attrs", "id", "name", "type", "helperText", "inputAttrs", "icon", "iconMode", ...mdcAttrs]) {
+            for (let key of ["id", "name", "type", "helperText", "inputAttrs", "icon", "iconMode", ...mdcAttrs]) {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

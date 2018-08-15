@@ -33,12 +33,9 @@ export default {
                 classes.push(cls+"--"+key);
             }
             delete result[key];
-            for (let key of attrKeys) {
+            for (let key of ["id", "name", ...attrKeys]) {
                 delete result[key];
             }
-            delete result.attrs;
-            delete result.id;
-            delete result.name;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

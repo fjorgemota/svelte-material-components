@@ -50,7 +50,7 @@ export default {
                 }
                 delete result[key];
             }
-            for (let key of ["attrs", "ripple", "icon", "href"])  {
+            for (let key of ["ripple", "icon", "href"])  {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

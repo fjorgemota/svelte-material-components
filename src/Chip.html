@@ -41,7 +41,7 @@ export default {
                 }
                 delete result[key];
             }
-            for (let key of ["icon", "iconMode", "checkmark", "attrs"]) {
+            for (let key of ["icon", "iconMode", "checkmark"]) {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

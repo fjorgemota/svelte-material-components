@@ -20,7 +20,6 @@ export default {
                 throw new Error(`Invalid type '${result.type}'}`);
             }
             delete result.type;
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

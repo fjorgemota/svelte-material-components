@@ -39,7 +39,7 @@ export default {
                 classes.push(cls+"--"+key);
             }
             delete result[key];
-            for (let key of ["attrs", "id", "name", "value", "selectedIndex", "disabled"]) {
+            for (let key of ["id", "name", "value", "selectedIndex", "disabled"]) {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

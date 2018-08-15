@@ -13,7 +13,6 @@ export default {
                 classes.push(cls+"--full-bleed");
             }
             delete result.full;
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

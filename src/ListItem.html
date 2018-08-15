@@ -43,7 +43,7 @@ export default {
                 }
                 delete result[key];
             }
-            for (let key of ["primaryText", "secondText", "showGraphic", "showMeta", "attrs"])  {
+            for (let key of ["primaryText", "secondText", "showGraphic", "showMeta"])  {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

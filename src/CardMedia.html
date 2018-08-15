@@ -17,7 +17,6 @@ export default {
                 classes.push(cls+"--square");
             }
             delete result.square;
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

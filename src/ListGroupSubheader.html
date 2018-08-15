@@ -8,7 +8,6 @@ export default {
             let result = Object.assign({}, attributes);
             let cls ="mdc-list-group__subheader";
             let classes = [cls];
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

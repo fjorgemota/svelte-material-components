@@ -30,13 +30,9 @@ export default {
             if (result.fixedColumnWidth) {
                 classes.push(cls+"--fixed-column-width");
             }
-            delete result.cols;
-            delete result.desktopCols;
-            delete result.tabletCols;
-            delete result.phoneCols;
-            delete result.order;
-            delete result.fixedColumnWidth;
-            delete result.attrs;
+            for (let key of ["cols", "desktopCols", "tabletCols", "phoneCols", "order", "fixedColumnWidth"]) {
+                delete result[key];
+            }
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }

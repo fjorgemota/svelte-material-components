@@ -27,7 +27,7 @@ export default {
                 }
                 delete result[key];
             }
-            for (let key of ["attrs", "underline", "icon"]) {
+            for (let key of ["underline", "icon"]) {
                 delete result[key];
             }
             result["class"] = processClasses(classes, result["class"]);

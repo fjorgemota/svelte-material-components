@@ -6,7 +6,6 @@ export default {
         attrs (attributes) {
             let result = Object.assign({"aria_hidden": "true"}, attributes);
             let classes = ["material-icons"];
-            delete result.attrs;
             result["class"] = processClasses(classes, result["class"]);
             return result;
         }
