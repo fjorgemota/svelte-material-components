@@ -37,6 +37,8 @@ export default {
         this.mdcComponent = new MDCTextField(this.refs.textArea);
     },
     onstate({current, changed}) {
+        if (!this.mdcComponent) return;
+
         for (let key of mdcAttrs) {
             if (changed[key]) {
                 this.mdcComponent[key] = current[key];
