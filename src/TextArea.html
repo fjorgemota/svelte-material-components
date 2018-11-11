@@ -28,6 +28,7 @@ import {MDCTextField} from "@material/textfield";
 import {MDCTextFieldIcon} from '@material/textfield/icon';
 
 import {processClasses} from "./helpers.js";
+const mdcAttrs = ["value", "min", "max", "step", "maxLength", "pattern", "required"];
 export default {
     components: {
         Icon: "./Icon.html"
@@ -65,6 +66,7 @@ export default {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls = "mdc-text-field";
+            let classes = [cls];
             result.textarea = true;
             for (let key of ["box", "textarea", "dense", "fullwidth", "outlined", "disabled", "focused"]) {
                 if (result[key]) {
