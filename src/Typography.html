@@ -15,7 +15,7 @@ export default {
         attrs (attributes) {
             let result = Object.assign({}, attributes);
             let cls ="";
-            let classes = ["mdc-mdc-typography"+(result.type?"--"+result.type : "")];
+            let classes = ["mdc-typography"+(result.type?"--"+result.type : "")];
             if (result.type && !validTypes.includes(result.type)) {
                 throw new Error(`Invalid type '${result.type}'}`);
             }
